@@ -1,0 +1,1073 @@
+{
+  "meta": {
+    "isMockData": true,
+    "lastUpdated": "2026-10-06",
+    "note": "MOCK DATA. Numbers and statuses are placeholders, not official OHS figures."
+  },
+  "years": {
+    "2026": {
+      "indicators": [
+        {
+          "id": "fatality",
+          "target": 100,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 2,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 3,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 4,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 5,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 6,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 7,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 8,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 10,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": null,
+              "status": null
+            },
+            {
+              "month": 12,
+              "performance": null,
+              "status": null
+            }
+          ]
+        },
+        {
+          "id": "ltifr",
+          "target": 95,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 95,
+              "status": "Good"
+            },
+            {
+              "month": 2,
+              "performance": 92,
+              "status": "Warning"
+            },
+            {
+              "month": 3,
+              "performance": 96,
+              "status": "Good"
+            },
+            {
+              "month": 4,
+              "performance": 94,
+              "status": "Warning"
+            },
+            {
+              "month": 5,
+              "performance": 90,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 93,
+              "status": "Warning"
+            },
+            {
+              "month": 7,
+              "performance": 97,
+              "status": "Good"
+            },
+            {
+              "month": 8,
+              "performance": 95,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 91,
+              "status": "Warning"
+            },
+            {
+              "month": 10,
+              "performance": 94,
+              "status": "Warning"
+            },
+            {
+              "month": 11,
+              "performance": null,
+              "status": null
+            },
+            {
+              "month": 12,
+              "performance": null,
+              "status": null
+            }
+          ]
+        },
+        {
+          "id": "ltisr",
+          "target": 90,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 78,
+              "status": "Critical"
+            },
+            {
+              "month": 2,
+              "performance": 82,
+              "status": "Warning"
+            },
+            {
+              "month": 3,
+              "performance": 85,
+              "status": "Warning"
+            },
+            {
+              "month": 4,
+              "performance": 88,
+              "status": "Warning"
+            },
+            {
+              "month": 5,
+              "performance": 84,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 80,
+              "status": "Warning"
+            },
+            {
+              "month": 7,
+              "performance": 86,
+              "status": "Warning"
+            },
+            {
+              "month": 8,
+              "performance": 91,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 89,
+              "status": "Warning"
+            },
+            {
+              "month": 10,
+              "performance": 87,
+              "status": "Warning"
+            },
+            {
+              "month": 11,
+              "performance": null,
+              "status": null
+            },
+            {
+              "month": 12,
+              "performance": null,
+              "status": null
+            }
+          ]
+        },
+        {
+          "id": "nofa",
+          "target": 100,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 2,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 3,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 4,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 5,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 6,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 7,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 8,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 10,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": null,
+              "status": null
+            },
+            {
+              "month": 12,
+              "performance": null,
+              "status": null
+            }
+          ]
+        },
+        {
+          "id": "sot",
+          "target": 90,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 92,
+              "status": "Good"
+            },
+            {
+              "month": 2,
+              "performance": 90,
+              "status": "Good"
+            },
+            {
+              "month": 3,
+              "performance": 94,
+              "status": "Good"
+            },
+            {
+              "month": 4,
+              "performance": 91,
+              "status": "Good"
+            },
+            {
+              "month": 5,
+              "performance": 95,
+              "status": "Good"
+            },
+            {
+              "month": 6,
+              "performance": 93,
+              "status": "Good"
+            },
+            {
+              "month": 7,
+              "performance": 96,
+              "status": "Good"
+            },
+            {
+              "month": 8,
+              "performance": 92,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 94,
+              "status": "Good"
+            },
+            {
+              "month": 10,
+              "performance": 95,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": null,
+              "status": null
+            },
+            {
+              "month": 12,
+              "performance": null,
+              "status": null
+            }
+          ]
+        },
+        {
+          "id": "mcu",
+          "target": 95,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 88,
+              "status": "Warning"
+            },
+            {
+              "month": 2,
+              "performance": 90,
+              "status": "Warning"
+            },
+            {
+              "month": 3,
+              "performance": 91,
+              "status": "Warning"
+            },
+            {
+              "month": 4,
+              "performance": 93,
+              "status": "Warning"
+            },
+            {
+              "month": 5,
+              "performance": 92,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 94,
+              "status": "Warning"
+            },
+            {
+              "month": 7,
+              "performance": 95,
+              "status": "Good"
+            },
+            {
+              "month": 8,
+              "performance": 96,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 97,
+              "status": "Good"
+            },
+            {
+              "month": 10,
+              "performance": 96,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": null,
+              "status": null
+            },
+            {
+              "month": 12,
+              "performance": null,
+              "status": null
+            }
+          ]
+        },
+        {
+          "id": "cam",
+          "target": 90,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 85,
+              "status": "Warning"
+            },
+            {
+              "month": 2,
+              "performance": 86,
+              "status": "Warning"
+            },
+            {
+              "month": 3,
+              "performance": 88,
+              "status": "Warning"
+            },
+            {
+              "month": 4,
+              "performance": 87,
+              "status": "Warning"
+            },
+            {
+              "month": 5,
+              "performance": 89,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 90,
+              "status": "Good"
+            },
+            {
+              "month": 7,
+              "performance": 91,
+              "status": "Good"
+            },
+            {
+              "month": 8,
+              "performance": 92,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 90,
+              "status": "Good"
+            },
+            {
+              "month": 10,
+              "performance": 93,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": null,
+              "status": null
+            },
+            {
+              "month": 12,
+              "performance": null,
+              "status": null
+            }
+          ]
+        },
+        {
+          "id": "ssd",
+          "target": 90,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 80,
+              "status": "Warning"
+            },
+            {
+              "month": 2,
+              "performance": 82,
+              "status": "Warning"
+            },
+            {
+              "month": 3,
+              "performance": 84,
+              "status": "Warning"
+            },
+            {
+              "month": 4,
+              "performance": 83,
+              "status": "Warning"
+            },
+            {
+              "month": 5,
+              "performance": 86,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 88,
+              "status": "Warning"
+            },
+            {
+              "month": 7,
+              "performance": 87,
+              "status": "Warning"
+            },
+            {
+              "month": 8,
+              "performance": 89,
+              "status": "Warning"
+            },
+            {
+              "month": 9,
+              "performance": 90,
+              "status": "Good"
+            },
+            {
+              "month": 10,
+              "performance": 91,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": null,
+              "status": null
+            },
+            {
+              "month": 12,
+              "performance": null,
+              "status": null
+            }
+          ]
+        }
+      ]
+    },
+    "2025": {
+      "indicators": [
+        {
+          "id": "fatality",
+          "target": 100,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 2,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 3,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 4,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 5,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 6,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 7,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 8,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 10,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 12,
+              "performance": 100,
+              "status": "Good"
+            }
+          ]
+        },
+        {
+          "id": "ltifr",
+          "target": 95,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 90,
+              "status": "Warning"
+            },
+            {
+              "month": 2,
+              "performance": 91,
+              "status": "Warning"
+            },
+            {
+              "month": 3,
+              "performance": 93,
+              "status": "Warning"
+            },
+            {
+              "month": 4,
+              "performance": 92,
+              "status": "Warning"
+            },
+            {
+              "month": 5,
+              "performance": 94,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 95,
+              "status": "Good"
+            },
+            {
+              "month": 7,
+              "performance": 93,
+              "status": "Warning"
+            },
+            {
+              "month": 8,
+              "performance": 96,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 94,
+              "status": "Warning"
+            },
+            {
+              "month": 10,
+              "performance": 95,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": 96,
+              "status": "Good"
+            },
+            {
+              "month": 12,
+              "performance": 97,
+              "status": "Good"
+            }
+          ]
+        },
+        {
+          "id": "ltisr",
+          "target": 90,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 75,
+              "status": "Critical"
+            },
+            {
+              "month": 2,
+              "performance": 77,
+              "status": "Critical"
+            },
+            {
+              "month": 3,
+              "performance": 80,
+              "status": "Warning"
+            },
+            {
+              "month": 4,
+              "performance": 82,
+              "status": "Warning"
+            },
+            {
+              "month": 5,
+              "performance": 81,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 84,
+              "status": "Warning"
+            },
+            {
+              "month": 7,
+              "performance": 86,
+              "status": "Warning"
+            },
+            {
+              "month": 8,
+              "performance": 85,
+              "status": "Warning"
+            },
+            {
+              "month": 9,
+              "performance": 87,
+              "status": "Warning"
+            },
+            {
+              "month": 10,
+              "performance": 88,
+              "status": "Warning"
+            },
+            {
+              "month": 11,
+              "performance": 90,
+              "status": "Good"
+            },
+            {
+              "month": 12,
+              "performance": 91,
+              "status": "Good"
+            }
+          ]
+        },
+        {
+          "id": "nofa",
+          "target": 100,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 2,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 3,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 4,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 5,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 6,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 7,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 8,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 10,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": 100,
+              "status": "Good"
+            },
+            {
+              "month": 12,
+              "performance": 100,
+              "status": "Good"
+            }
+          ]
+        },
+        {
+          "id": "sot",
+          "target": 90,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 85,
+              "status": "Warning"
+            },
+            {
+              "month": 2,
+              "performance": 87,
+              "status": "Warning"
+            },
+            {
+              "month": 3,
+              "performance": 88,
+              "status": "Warning"
+            },
+            {
+              "month": 4,
+              "performance": 90,
+              "status": "Good"
+            },
+            {
+              "month": 5,
+              "performance": 89,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 91,
+              "status": "Good"
+            },
+            {
+              "month": 7,
+              "performance": 92,
+              "status": "Good"
+            },
+            {
+              "month": 8,
+              "performance": 90,
+              "status": "Good"
+            },
+            {
+              "month": 9,
+              "performance": 93,
+              "status": "Good"
+            },
+            {
+              "month": 10,
+              "performance": 92,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": 94,
+              "status": "Good"
+            },
+            {
+              "month": 12,
+              "performance": 95,
+              "status": "Good"
+            }
+          ]
+        },
+        {
+          "id": "mcu",
+          "target": 95,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 82,
+              "status": "Critical"
+            },
+            {
+              "month": 2,
+              "performance": 84,
+              "status": "Critical"
+            },
+            {
+              "month": 3,
+              "performance": 86,
+              "status": "Warning"
+            },
+            {
+              "month": 4,
+              "performance": 88,
+              "status": "Warning"
+            },
+            {
+              "month": 5,
+              "performance": 90,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 91,
+              "status": "Warning"
+            },
+            {
+              "month": 7,
+              "performance": 92,
+              "status": "Warning"
+            },
+            {
+              "month": 8,
+              "performance": 93,
+              "status": "Warning"
+            },
+            {
+              "month": 9,
+              "performance": 94,
+              "status": "Warning"
+            },
+            {
+              "month": 10,
+              "performance": 95,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": 95,
+              "status": "Good"
+            },
+            {
+              "month": 12,
+              "performance": 96,
+              "status": "Good"
+            }
+          ]
+        },
+        {
+          "id": "cam",
+          "target": 90,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 78,
+              "status": "Critical"
+            },
+            {
+              "month": 2,
+              "performance": 80,
+              "status": "Warning"
+            },
+            {
+              "month": 3,
+              "performance": 82,
+              "status": "Warning"
+            },
+            {
+              "month": 4,
+              "performance": 83,
+              "status": "Warning"
+            },
+            {
+              "month": 5,
+              "performance": 85,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 86,
+              "status": "Warning"
+            },
+            {
+              "month": 7,
+              "performance": 88,
+              "status": "Warning"
+            },
+            {
+              "month": 8,
+              "performance": 87,
+              "status": "Warning"
+            },
+            {
+              "month": 9,
+              "performance": 89,
+              "status": "Warning"
+            },
+            {
+              "month": 10,
+              "performance": 90,
+              "status": "Good"
+            },
+            {
+              "month": 11,
+              "performance": 91,
+              "status": "Good"
+            },
+            {
+              "month": 12,
+              "performance": 92,
+              "status": "Good"
+            }
+          ]
+        },
+        {
+          "id": "ssd",
+          "target": 90,
+          "monthly": [
+            {
+              "month": 1,
+              "performance": 70,
+              "status": "Critical"
+            },
+            {
+              "month": 2,
+              "performance": 72,
+              "status": "Critical"
+            },
+            {
+              "month": 3,
+              "performance": 75,
+              "status": "Critical"
+            },
+            {
+              "month": 4,
+              "performance": 78,
+              "status": "Critical"
+            },
+            {
+              "month": 5,
+              "performance": 80,
+              "status": "Warning"
+            },
+            {
+              "month": 6,
+              "performance": 82,
+              "status": "Warning"
+            },
+            {
+              "month": 7,
+              "performance": 83,
+              "status": "Warning"
+            },
+            {
+              "month": 8,
+              "performance": 85,
+              "status": "Warning"
+            },
+            {
+              "month": 9,
+              "performance": 86,
+              "status": "Warning"
+            },
+            {
+              "month": 10,
+              "performance": 88,
+              "status": "Warning"
+            },
+            {
+              "month": 11,
+              "performance": 89,
+              "status": "Warning"
+            },
+            {
+              "month": 12,
+              "performance": 90,
+              "status": "Good"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

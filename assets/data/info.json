@@ -1,0 +1,33 @@
+{
+    "meta": {
+        "isMockData": true,
+        "note": "DATA CONTOH. Isi dan tanggal hanya placeholder pengembangan, bukan informasi resmi OHS."
+    },
+    "alert": {
+        "message": "Contoh peringatan: tingkatkan kewaspadaan dan patuhi prosedur K3 di area kerja.",
+        "updated": "2026-10-10",
+        "expires": "2026-10-31"
+    },
+    "schedule": [
+        {
+            "date": "2026-10-05",
+            "title": "Contoh kegiatan yang sudah lewat (otomatis disembunyikan)",
+            "detail": ""
+        },
+        {
+            "date": "2026-10-12",
+            "title": "Contoh: Safety Talk pagi",
+            "detail": "08.00 WITA · Area produksi"
+        },
+        {
+            "date": "2026-10-15",
+            "title": "Contoh: Inspeksi area kerja",
+            "detail": "09.30 WITA"
+        },
+        {
+            "date": "2026-10-20",
+            "title": "Contoh: Pelatihan tanggap darurat",
+            "detail": "Ruang pelatihan"
+        }
+    ]
+}

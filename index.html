@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OHS Safety Performance Dashboard</title>
+    <meta name="description" content="Dashboard publik performa keselamatan dan kesehatan kerja (OHS) bulanan." />
+
+    <!-- Dependencies (CDN, versi dipatok): Bootstrap 5, Inter, Chart.js, Lucide -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/dashboard.css" rel="stylesheet" />
+  </head>
+  
+  <body data-page="dashboard">
+    <!-- ============ SIDEBAR (drawer di bawah 1200px) ============ -->
+    <aside class="sidebar offcanvas-xl offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarTitle">
+      <div class="sidebar-brand">
+        <div class="brand-logo" aria-hidden="true">
+          <img src="assets\img\logo-semen-tonasa.png" alt="" srcset="" />
+        </div>
+        <div class="brand-text">
+          <div class="brand-name" id="sidebarTitle">PT. SEMEN TONASA</div>
+          <div class="brand-sub">Occupational Health &amp; Safety</div>
+        </div>
+        <button type="button" class="btn-close btn-close-white d-xl-none ms-auto" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Tutup menu"></button>
+      </div>
+      <nav class="sidebar-nav" aria-label="Menu utama">
+        <ul class="nav-list" id="navList"></ul>
+      </nav>
+      <div class="sidebar-foot">
+        Est. 2026
+      </div>
+    </aside>
+
+    <!-- ============ KONTEN UTAMA ============ -->
+    <div class="app-main">
+      <header class="app-header">
+        <button type="button" class="icon-btn" id="menuToggle" aria-controls="sidebar" aria-expanded="true" aria-label="Menu navigasi">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="header-title">
+          <h1 class="page-title">Dashboard Utama Unit OHS</h1>
+          <p class="clock" id="clock"><time id="clockValue">-</time></p>
+        </div>
+        <div class="header-tools">
+          <div class="tool-group">
+            <label for="yearSelect" class="tool-label">Tahun</label>
+            <select id="yearSelect" class="form-select form-select-sm tool-select" disabled></select>
+          </div>
+          <div class="updated" id="lastUpdated" aria-live="polite">
+            <span class="updated-label">Terakhir diperbarui</span>
+            <span class="updated-value" id="lastUpdatedValue">-</span>
+          </div>
+          <button type="button" class="icon-btn" id="refreshBtn" aria-label="Muat ulang data">
+            <i data-lucide="refresh-cw"></i>
+          </button>
+        </div>
+      </header>
+
+      <main id="main" class="content" tabindex="-1">
+        <!-- Penanda data contoh (ditampilkan JS bila meta.isMockData = true) -->
+        <div class="mock-banner" id="mockBanner" hidden role="note">
+          <i data-lucide="info" aria-hidden="true"></i>
+          <span><strong>Data contoh.</strong> Angka dan status di bawah hanya
+            placeholder pengembangan, bukan data resmi OHS.</span>
+        </div>
+
+        <!-- Loading -->
+        <div class="state-box" id="stateLoading" role="status" aria-live="polite">
+          <div class="spinner-border spinner-border-sm text-primary" aria-hidden="true"></div>
+          <span>Memuat data dashboard&hellip;</span>
+        </div>
+
+        <!-- Error -->
+        <div class="state-box state-error" id="stateError" role="alert" hidden>
+          <i data-lucide="triangle-alert" aria-hidden="true"></i>
+          <div>
+            <div class="state-title">
+              Unable to load the latest dashboard data.
+            </div>
+            <div class="state-sub">
+              Periksa koneksi atau sumber data, lalu coba lagi.
+            </div>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-primary ms-auto"id="retryBtn">
+            Coba lagi
+          </button>
+        </div>
+
+        <!-- Dashboard -->
+        <div id="dashboard" hidden>
+          <section aria-labelledby="kpiHeading" class="section">
+            <div class="section-head">
+              <h2 class="section-title" id="kpiHeading">
+                Indikator Safety Performance
+              </h2>
+              <span class="section-meta">Periode: <strong id="periodLabel">-</strong><span class="kpi-hint-inline">Klik kartu untuk detail</span></span>
+            </div>
+            <div class="row g-3" id="kpiGrid"></div>
+          </section>
+
+          <div class="dash-main section">
+            <div class="dash-left">
+              <section class="dash-trend" aria-labelledby="trendHeading">
+              <div class="card-panel">
+                <div class="section-head section-head-wrap">
+                  <h2 class="section-title" id="trendHeading">Monthly Performance Trend</h2>
+                  <div class="chart-controls">
+                    <div class="tool-group">
+                      <label for="indicatorSelect" class="tool-label">Indikator</label>
+                      <select id="indicatorSelect" class="form-select form-select-sm tool-select"></select>
+                    </div>
+                    <div class="tool-group">
+                      <label for="yearSelectChart" class="tool-label">Tahun</label>
+                      <select id="yearSelectChart" class="form-select form-select-sm tool-select"></select>
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-wrap" id="chartWrap">
+                  <canvas id="trendChart" role="img" aria-label="Grafik tren performa bulanan"></canvas>
+                  <div class="chart-empty" id="chartEmpty" hidden>No performance data available for this period.</div>
+                </div>
+                <p class="chart-note" id="chartNote"></p>
+                <!-- Alternatif teks untuk pembaca layar -->
+                <table class="visually-hidden" id="chartTable">
+                  <caption>Data tren bulanan</caption>
+                  <thead><tr><th scope="col">Bulan</th><th scope="col">Performa (%)</th><th scope="col">Status</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </section>
+
+            <section class="dash-summary" aria-labelledby="summaryHeading">
+              <div class="card-panel">
+                <div class="section-head">
+                  <h2 class="section-title" id="summaryHeading">Performance Status Summary</h2>
+                </div>
+                <p class="summary-sub" id="summarySub"></p>
+                <ul class="summary-list" id="summaryList"></ul>
+              </div>
+            </section>
+          </div>
+
+          <div class="dash-right">
+            <section class="dash-alert alert-card" id="alertCard" aria-labelledby="alertHeading" hidden>
+              <h2 class="alert-title" id="alertHeading"><i data-lucide="triangle-alert" aria-hidden="true"></i>Safety Alert</h2>
+              <p class="alert-text" id="alertText"></p>
+              <p class="alert-meta" id="alertMeta"></p>
+            </section>
+
+            <section class="dash-schedule" aria-labelledby="scheduleHeading">
+              <div class="card-panel">
+                <div class="section-head">
+                  <h2 class="section-title" id="scheduleHeading">Jadwal Kegiatan OHS</h2>
+                </div>
+                <ul class="schedule-list" id="scheduleList"><li class="info-empty">Memuat jadwal&hellip;</li></ul>
+                <p class="info-mock" id="infoMock" hidden>Data contoh, bukan jadwal resmi.</p>
+              </div>
+            </section>
+
+            <section class="dash-quick" aria-labelledby="quickHeading">
+              <div class="card-panel">
+                <div class="section-head">
+                  <h2 class="section-title" id="quickHeading">Quick Access</h2>
+                </div>
+                <div class="row quick-compact" id="quickGrid"></div>
+              </div>
+            </section>
+          </div>
+        </div>
+        </div>
+
+        <footer class="app-footer">
+          Unit of OHS PT. Semen Tonasa
+        </footer>
+      </main>
+    </div>
+
+    <!-- ============ MODAL: KPI DETAIL ============ -->
+    <div class="modal fade" id="kpiDetailModal" tabindex="-1" aria-labelledby="kpiDetailTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-head-text">
+              <h2 class="modal-title h5" id="kpiDetailTitle">—</h2>
+              <p class="modal-sub" id="kpiDetailPeriod">—</p>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup detail indikator"></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="kpi-detail-head">
+              <span class="kpi-value" id="kpiDetailValue">—</span>
+              <span class="badge-status status-none" id="kpiDetailStatus">—</span>
+              <span class="kpi-detail-target" id="kpiDetailTarget">—</span>
+            </div>
+
+            <div class="kpi-detail-chart-wrap">
+              <canvas id="kpiDetailChart" role="img" aria-label="Grafik detail indikator"></canvas>
+              <div class="chart-empty" id="kpiDetailChartEmpty" hidden>Belum ada data untuk periode ini.</div>
+            </div>
+            <p class="chart-note" id="kpiDetailChartNote"></p>
+
+            <div class="kpi-detail-explanation">
+              <h3 class="kpi-detail-explain-title">Mengapa nilainya demikian?</h3>
+              <p class="kpi-detail-explain-text" id="kpiDetailExplanation">—</p>
+              <p class="kpi-detail-note">
+                Status <strong>Good</strong> / <strong>Warning</strong> / <strong>Critical</strong>
+                dibaca langsung dari data yang dikelola unit OHS, tidak dihitung oleh dashboard.
+              </p>
+              <dl class="kpi-detail-dl">
+                <dt>Rumus</dt>
+                <dd id="kpiDetailFormula">—</dd>
+                <dt>Ambang Good</dt>
+                <dd id="kpiDetailGood">—</dd>
+                <dt>Ambang Warning</dt>
+                <dd id="kpiDetailWarning">—</dd>
+                <dt>Ambang Critical</dt>
+                <dd id="kpiDetailCritical">—</dd>
+              </dl>
+              
+              <p class="kpi-detail-todo" id="kpiDetailTodo" hidden>
+                <i data-lucide="info" aria-hidden="true"></i>
+                <span>Formula &amp; ambang batas di atas masih <strong>placeholder</strong>. Menunggu penetapan resmi dari unit OHS.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/data-service.js"></script>
+    <script src="assets/js/info.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
