@@ -68,7 +68,7 @@
         <div class="row g-3">${linkCardsHtml(g.items || [])}</div>
       </section>`,
       )
-      .join();
+      .join("");
   }
 
   /* ---------- Status: loading / error / dashboard ---------- */

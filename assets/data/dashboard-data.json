@@ -8,7 +8,7 @@
     "2026": {
       "indicators": [
         {
-          "id": "fatality",
+          "id": "zfr",
           "target": 100,
           "monthly": [
             {
@@ -540,7 +540,7 @@
     "2025": {
       "indicators": [
         {
-          "id": "fatality",
+          "id": "zfr",
           "target": 100,
           "monthly": [
             {

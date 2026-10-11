@@ -102,9 +102,9 @@ const ohsConfig = {
   Kosongkan jika tidak perlu. */
   indicators: [
     {
-      id: "fatality",
-      name: "Fatality",
-      fullName: "Kejadian Fatal",
+      id: "zfr",
+      name: "ZFR",
+      fullName: "Zero Fatality Rate",
       icon: "shield-alert",
       chartType: "line",
       formulaText: "TODO: menunggu rumus resmi dari unit OHS.",
