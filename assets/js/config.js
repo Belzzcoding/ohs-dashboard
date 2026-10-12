@@ -28,9 +28,10 @@ const ohsLinks = {
   type "sheets" : membaca CSV dari Google Sheets "Publish to web"
   Jangan pernah menaruh API key / secret di sini. */
 const dataSource = {
-  type: "local",
+  type: "sheets",
   localUrl: "assets/data/dashboard-data.json",
-  sheetsCsvUrl: ""
+  sheetsCsvUrl:
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4hLSBN-nkOOZeSgNpld2cdVRqUsfsxi03tugmqHKjAkm3plM81wfgwHQwzLJIg171CPyhjRqrYNG/pub?gid=0&single=true&output=csv",
 };
 
 /* ---------- 2b. Sumber data "Informasi Terkini" (Safety Alert + Jadwal) ----------
@@ -43,9 +44,10 @@ const dataSource = {
   Format tanggal WAJIB YYYY-MM-DD (format kolom sebagai teks / plain text di Sheets).
   Jangan pernah menaruh API key / secret di sini. */
 const infoSource = {
-  type: "local",
+  type: "sheets",
   localUrl: "assets/data/info.json",
-  sheetsCsvUrl: ""
+  sheetsCsvUrl:
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4hLSBN-nkOOZeSgNpld2cdVRqUsfsxi03tugmqHKjAkm3plM81wfgwHQwzLJIg171CPyhjRqrYNG/pub?gid=779595226&single=true&output=csv",
 };
 
 /* ---------- 3. Pengaturan tampilan ---------- */
