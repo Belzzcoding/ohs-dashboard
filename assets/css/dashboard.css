@@ -347,3 +347,42 @@
   position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
   clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
 }
+
+ /* ---------- KARTU SKOR TOTAL (halaman Dashboard) ---------- */
+.total-card {
+  display: grid;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--blue);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.total-main { display: grid; gap: 6px; }
+.total-label { font-size: 0.875rem; font-weight: 600; color: var(--text-2); }
+.total-value {
+  font-size: clamp(2.25rem, 1.8rem + 1.6vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.total-value .unit { font-size: 0.5em; font-weight: 600; color: var(--text-2); margin-left: 2px; }
+.total-sub { margin: 0; font-size: 0.8125rem; color: var(--text-2); }
+
+.total-detail { border-top: 1px solid var(--border); padding-top: 10px; }
+.total-detail summary {
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--blue);
+  border-radius: 6px;
+}
+.total-detail summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.total-table { margin: 12px 0 0; font-size: 0.875rem; max-width: 520px; }
+.total-table th, .total-table td { vertical-align: middle; font-variant-numeric: tabular-nums; }
+.total-table th:not(:first-child), .total-table td { text-align: right; }
+.total-table tbody th { font-weight: 500; }
+.total-table tfoot th, .total-table tfoot td { border-top: 2px solid var(--border); font-weight: 700; }
+.total-note { margin: 8px 0 0; font-size: 0.75rem; color: var(--text-2); }

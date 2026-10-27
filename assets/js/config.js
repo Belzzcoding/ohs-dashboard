@@ -1,7 +1,6 @@
 /* ---------- 1. Link eksternal OHS ----------
   Kosongkan ("") bila belum ada. Kartu / menu dengan link kosong atau tidak valid otomatis dinonaktifkan (tidak ada link rusak).
-  Hanya URL berawalan https:// yang diterima.
-  TODO: isi dengan URL resmi dari unit OHS (pertanyaan terbuka #4 di PRD). */
+  Hanya URL berawalan https:// yang diterima.*/
 const ohsLinks = {
   safety: "",
   occupationalHealth: "",
@@ -24,7 +23,7 @@ const dataSource = {
   type: "sheets",
   localUrl: "assets/data/dashboard-data.json",
   sheetsCsvUrl:
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4hLSBN-nkOOZeSgNpld2cdVRqUsfsxi03tugmqHKjAkm3plM81wfgwHQwzLJIg171CPyhjRqrYNG/pub?gid=0&single=true&output=csv",
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4hLSBN-nkOOZeSgNpld2cdVRqUsfsxi03tugmqHKjAkm3plM81wfgwHQwzLJIg171CPyhjRqrYNG/pub?output=csv",
 };
 
 /* ---------- 2b. Sumber data "Informasi Terkini" (Safety Alert + Jadwal) ----------
@@ -58,11 +57,37 @@ const ohsConfig = {
   // Fitur KPI detail (modal)
   kpiDetailEnabled: true,
 
-  statusLabels: {
-    Good: "Good",
-    Warning: "Warning",
-    Critical: "Critical",
-    none: "Belum ada data",
+  /* Skor total resmi (Katalog KPI Generic 2026 - Safety Performance).
+  capScore: ASUMSI SEMENTARA - skor LTIFR/LTISR dibatasi 0-100%.
+  Rumus katalog (2 - realisasi/target) bisa >100% atau negatif;
+  ubah ke false bila unit OHS menyatakan tidak dibatasi. */
+  scoring: {
+    capScore: true,
+    totalTarget: 90,
+    totalLabel: "Skor Safety Performance",
+    sourceNote: "Katalog KPI Generic 2026 – Safety Performance",
+  },
+
+  /* Hanya 2 status: tercapai atau belum (tidak ada pita Warning di katalog). */
+  statuses: {
+    met: {
+      label: "Tercapai",
+      cls: "status-good",
+      color: "#16A34A",
+      point: "circle",
+    },
+    notMet: {
+      label: "Belum tercapai",
+      cls: "status-critical",
+      color: "#DC2626",
+      point: "rectRot",
+    },
+    none: {
+      label: "Belum ada data",
+      cls: "status-none",
+      color: "#94A3B8",
+      point: "circle",
+    },
   },
 
   monthsShort: [
@@ -94,22 +119,27 @@ const ohsConfig = {
     "Desember",
   ],
 
-  /* 8 indikator. id harus sama dengan kolom "indicator" di data.
-    - id           : sama dengan kolom "indicator" di data.
-    - chartType    : "line" | "bar" | "doughnut" — jenis grafik di modal detail.
-    - formulaText         : rumus resmi dari unit OHS. Awali "TODO" bila belum ada.
-    - thresholds          : teks ambang Good / Warning / Critical. Awali "TODO" bila belum ada.
-    - explanationTemplate : kalimat tambahan di bawah penjelasan otomatis.
-  Kosongkan jika tidak perlu. */
+  /* 8 indikator. id harus sama dengan kolom "indicator" di sheet.
+      weight      : bobot dalam skor total (jumlah semua = 100)
+      rule.type   : "zero" | "rate" | "progress"   (penjelasan di scoring.js)
+      rule.target : (rate) batas realisasi; makin kecil makin baik
+      rule.fullAt : (progress) realisasi untuk nilai penuh 100%
+      rule.passAt : (progress) realisasi minimum agar berstatus Tercapai
+      rule.unit   : satuan realisasi
+      assumed     : true bila aturan masih ASUMSI sementara (menunggu unit OHS)
+      formulaText : rumus resmi (teks tampil di popup)
+      chartType   : "line" | "bar" | "doughnut" (grafik di popup)  */
   indicators: [
     {
-      id: "zfr",
-      name: "ZFR",
-      fullName: "Zero Fatality Rate",
+      id: "fatality",
+      name: "Fatality",
+      fullName: "Zero Fatality Rate (ZFR)",
       icon: "shield-alert",
-      chartType: "line",
-      formulaText: "TODO: menunggu rumus resmi dari unit OHS.",
-      thresholds: { good: "TODO", warning: "TODO", critical: "TODO" },
+      chartType: "bar",
+      weight: 20,
+      rule: { type: "zero", unit: "kejadian" },
+      formulaText:
+        "Tidak ada kematian akibat pekerjaan → 100%. Terjadi kematian → 0%. Realisasi diisi jumlah kejadian.",
       explanationTemplate: "",
     },
     {
@@ -118,8 +148,10 @@ const ohsConfig = {
       fullName: "Lost Time Injury Frequency Rate",
       icon: "activity",
       chartType: "line",
-      formulaText: "TODO: menunggu rumus resmi dari unit OHS.",
-      thresholds: { good: "TODO", warning: "TODO", critical: "TODO" },
+      weight: 10,
+      rule: { type: "rate", target: 0.25 },
+      formulaText:
+        "Realisasi LTIFR = (Jumlah accident × 1.000.000) ÷ Total jam kerja. Skor = 2 − (Realisasi ÷ Target).",
       explanationTemplate: "",
     },
     {
@@ -128,8 +160,10 @@ const ohsConfig = {
       fullName: "Lost Time Injury Severity Rate",
       icon: "gauge",
       chartType: "line",
-      formulaText: "TODO: menunggu rumus resmi dari unit OHS.",
-      thresholds: { good: "TODO", warning: "TODO", critical: "TODO" },
+      weight: 10,
+      rule: { type: "rate", target: 4.75 },
+      formulaText:
+        "Realisasi LTISR = (Jumlah jam kerja hilang × 1.000.000) ÷ Total jam kerja. Skor = 2 − (Realisasi ÷ Target).",
       explanationTemplate: "",
     },
     {
@@ -137,40 +171,54 @@ const ohsConfig = {
       name: "NoFA",
       fullName: "Number of Fire Accident",
       icon: "flame",
-      chartType: "line",
-      formulaText: "TODO: menunggu rumus resmi dari unit OHS.",
-      thresholds: { good: "TODO", warning: "TODO", critical: "TODO" },
+      chartType: "bar",
+      weight: 10,
+      rule: { type: "zero", unit: "kejadian" },
+      formulaText:
+        "Tidak ada kebakaran dengan kerugian lebih dari Rp3 miliar → 100%. Ada → 0%. Realisasi diisi jumlah kejadian.",
       explanationTemplate: "",
     },
     {
       id: "sot",
       name: "SOT",
-      fullName: "Safety Observation Tool",
+      fullName: "Safety Observation Tour",
       icon: "eye",
-      chartType: "line",
-      formulaText: "TODO: menunggu rumus resmi dari unit OHS.",
-      thresholds: { good: "TODO", warning: "TODO", critical: "TODO" },
-      explanationTemplate: "",
+      chartType: "bar",
+      weight: 20,
+      rule: { type: "progress", fullAt: 2, passAt: 1, unit: "×/bulan" },
+      formulaText:
+        "Rata-rata karyawan melakukan SOT 2× per bulan (offline atau online) → 100%. Minimal 1× per bulan → 50% dan tetap Tercapai. Realisasi diisi rata-rata kali per bulan.",
+      explanationTemplate:
+        "Nilai di antara 1× dan 2× dihitung proporsional (asumsi sementara menunggu unit OHS).",
+      assumed: true,
     },
     {
       id: "mcu",
       name: "MCU",
-      fullName: "Medical Check Up",
+      fullName: "Medical Check Up Completed",
       icon: "stethoscope",
       chartType: "line",
-      formulaText: "TODO: menunggu rumus resmi dari unit OHS.",
-      thresholds: { good: "TODO", warning: "TODO", critical: "TODO" },
-      explanationTemplate: "",
+      weight: 10,
+      rule: { type: "progress", fullAt: 100, passAt: 100, unit: "%" },
+      formulaText:
+        "Persentase karyawan yang telah melakukan MCU (realisasi ÷ target). Realisasi diisi persen.",
+      explanationTemplate:
+        "Batas Tercapai = 100% adalah asumsi sementara menunggu unit OHS.",
+      assumed: true,
     },
     {
       id: "cam",
       name: "CAM",
-      fullName: "Consultation After MCU",
+      fullName: "Consultation After MCU Completed",
       icon: "messages-square",
       chartType: "line",
-      formulaText: "TODO: menunggu rumus resmi dari unit OHS.",
-      thresholds: { good: "TODO", warning: "TODO", critical: "TODO" },
-      explanationTemplate: "",
+      weight: 10,
+      rule: { type: "progress", fullAt: 100, passAt: 100, unit: "%" },
+      formulaText:
+        "Persentase karyawan yang telah konsultasi dengan dokter perusahaan setelah hasil MCU (realisasi ÷ target). Realisasi diisi persen.",
+      explanationTemplate:
+        "Batas Tercapai = 100% adalah asumsi sementara menunggu unit OHS.",
+      assumed: true,
     },
     {
       id: "ssd",
@@ -178,9 +226,12 @@ const ohsConfig = {
       fullName: "SHE Self Development",
       icon: "graduation-cap",
       chartType: "line",
-      formulaText: "TODO: menunggu rumus resmi dari unit OHS.",
-      thresholds: { good: "TODO", warning: "TODO", critical: "TODO" },
-      explanationTemplate: "",
+      weight: 10,
+      rule: { type: "progress", fullAt: 10, passAt: 10, unit: "jam" },
+      formulaText:
+        "Self learning modul health & safety minimal 10 jam per tahun → 100%. Realisasi diisi rata-rata jam belajar per karyawan sejak Januari.",
+      explanationTemplate:
+        "Di tengah tahun nilainya menunjukkan progres menuju 10 jam, bukan target proporsional per bulan.",
     },
   ],
 

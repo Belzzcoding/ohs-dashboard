@@ -2,536 +2,368 @@
   "meta": {
     "isMockData": true,
     "lastUpdated": "2026-10-06",
-    "note": "MOCK DATA. Numbers and statuses are placeholders, not official OHS figures."
+    "note": "MOCK DATA. Angka realisasi hanya placeholder, bukan data resmi OHS."
   },
   "years": {
     "2026": {
       "indicators": [
         {
-          "id": "zfr",
-          "target": 100,
+          "id": "fatality",
           "monthly": [
             {
               "month": 1,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 2,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 3,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 4,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 5,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 6,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 7,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 8,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 9,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 10,
-              "performance": 100,
-              "status": "Good"
-            },
-            {
-              "month": 11,
-              "performance": null,
-              "status": null
-            },
-            {
-              "month": 12,
-              "performance": null,
-              "status": null
+              "realisasi": 0
             }
           ]
         },
         {
           "id": "ltifr",
-          "target": 95,
           "monthly": [
             {
               "month": 1,
-              "performance": 95,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 2,
-              "performance": 92,
-              "status": "Warning"
+              "realisasi": 0
             },
             {
               "month": 3,
-              "performance": 96,
-              "status": "Good"
+              "realisasi": 0.08
             },
             {
               "month": 4,
-              "performance": 94,
-              "status": "Warning"
+              "realisasi": 0.1
             },
             {
               "month": 5,
-              "performance": 90,
-              "status": "Warning"
+              "realisasi": 0.12
             },
             {
               "month": 6,
-              "performance": 93,
-              "status": "Warning"
+              "realisasi": 0.11
             },
             {
               "month": 7,
-              "performance": 97,
-              "status": "Good"
+              "realisasi": 0.13
             },
             {
               "month": 8,
-              "performance": 95,
-              "status": "Good"
+              "realisasi": 0.12
             },
             {
               "month": 9,
-              "performance": 91,
-              "status": "Warning"
+              "realisasi": 0.12
             },
             {
               "month": 10,
-              "performance": 94,
-              "status": "Warning"
-            },
-            {
-              "month": 11,
-              "performance": null,
-              "status": null
-            },
-            {
-              "month": 12,
-              "performance": null,
-              "status": null
+              "realisasi": 0.11
             }
           ]
         },
         {
           "id": "ltisr",
-          "target": 90,
           "monthly": [
             {
               "month": 1,
-              "performance": 78,
-              "status": "Critical"
+              "realisasi": 0
             },
             {
               "month": 2,
-              "performance": 82,
-              "status": "Warning"
+              "realisasi": 0
             },
             {
               "month": 3,
-              "performance": 85,
-              "status": "Warning"
+              "realisasi": 2.1
             },
             {
               "month": 4,
-              "performance": 88,
-              "status": "Warning"
+              "realisasi": 3.0
             },
             {
               "month": 5,
-              "performance": 84,
-              "status": "Warning"
+              "realisasi": 3.4
             },
             {
               "month": 6,
-              "performance": 80,
-              "status": "Warning"
+              "realisasi": 3.2
             },
             {
               "month": 7,
-              "performance": 86,
-              "status": "Warning"
+              "realisasi": 3.6
             },
             {
               "month": 8,
-              "performance": 91,
-              "status": "Good"
+              "realisasi": 3.5
             },
             {
               "month": 9,
-              "performance": 89,
-              "status": "Warning"
+              "realisasi": 3.4
             },
             {
               "month": 10,
-              "performance": 87,
-              "status": "Warning"
-            },
-            {
-              "month": 11,
-              "performance": null,
-              "status": null
-            },
-            {
-              "month": 12,
-              "performance": null,
-              "status": null
+              "realisasi": 3.3
             }
           ]
         },
         {
           "id": "nofa",
-          "target": 100,
           "monthly": [
             {
               "month": 1,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 2,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 3,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 4,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 5,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 6,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 7,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 8,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 9,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 10,
-              "performance": 100,
-              "status": "Good"
-            },
-            {
-              "month": 11,
-              "performance": null,
-              "status": null
-            },
-            {
-              "month": 12,
-              "performance": null,
-              "status": null
+              "realisasi": 0
             }
           ]
         },
         {
           "id": "sot",
-          "target": 90,
           "monthly": [
             {
               "month": 1,
-              "performance": 92,
-              "status": "Good"
+              "realisasi": 1.4
             },
             {
               "month": 2,
-              "performance": 90,
-              "status": "Good"
+              "realisasi": 1.6
             },
             {
               "month": 3,
-              "performance": 94,
-              "status": "Good"
+              "realisasi": 1.7
             },
             {
               "month": 4,
-              "performance": 91,
-              "status": "Good"
+              "realisasi": 1.8
             },
             {
               "month": 5,
-              "performance": 95,
-              "status": "Good"
+              "realisasi": 1.9
             },
             {
               "month": 6,
-              "performance": 93,
-              "status": "Good"
+              "realisasi": 1.9
             },
             {
               "month": 7,
-              "performance": 96,
-              "status": "Good"
+              "realisasi": 2.0
             },
             {
               "month": 8,
-              "performance": 92,
-              "status": "Good"
+              "realisasi": 2.1
             },
             {
               "month": 9,
-              "performance": 94,
-              "status": "Good"
+              "realisasi": 2.1
             },
             {
               "month": 10,
-              "performance": 95,
-              "status": "Good"
-            },
-            {
-              "month": 11,
-              "performance": null,
-              "status": null
-            },
-            {
-              "month": 12,
-              "performance": null,
-              "status": null
+              "realisasi": 2.2
             }
           ]
         },
         {
           "id": "mcu",
-          "target": 95,
           "monthly": [
             {
               "month": 1,
-              "performance": 88,
-              "status": "Warning"
+              "realisasi": 20
             },
             {
               "month": 2,
-              "performance": 90,
-              "status": "Warning"
+              "realisasi": 35
             },
             {
               "month": 3,
-              "performance": 91,
-              "status": "Warning"
+              "realisasi": 50
             },
             {
               "month": 4,
-              "performance": 93,
-              "status": "Warning"
+              "realisasi": 60
             },
             {
               "month": 5,
-              "performance": 92,
-              "status": "Warning"
+              "realisasi": 72
             },
             {
               "month": 6,
-              "performance": 94,
-              "status": "Warning"
+              "realisasi": 80
             },
             {
               "month": 7,
-              "performance": 95,
-              "status": "Good"
+              "realisasi": 88
             },
             {
               "month": 8,
-              "performance": 96,
-              "status": "Good"
+              "realisasi": 92
             },
             {
               "month": 9,
-              "performance": 97,
-              "status": "Good"
+              "realisasi": 95
             },
             {
               "month": 10,
-              "performance": 96,
-              "status": "Good"
-            },
-            {
-              "month": 11,
-              "performance": null,
-              "status": null
-            },
-            {
-              "month": 12,
-              "performance": null,
-              "status": null
+              "realisasi": 97
             }
           ]
         },
         {
           "id": "cam",
-          "target": 90,
           "monthly": [
             {
               "month": 1,
-              "performance": 85,
-              "status": "Warning"
+              "realisasi": 15
             },
             {
               "month": 2,
-              "performance": 86,
-              "status": "Warning"
+              "realisasi": 30
             },
             {
               "month": 3,
-              "performance": 88,
-              "status": "Warning"
+              "realisasi": 45
             },
             {
               "month": 4,
-              "performance": 87,
-              "status": "Warning"
+              "realisasi": 55
             },
             {
               "month": 5,
-              "performance": 89,
-              "status": "Warning"
+              "realisasi": 68
             },
             {
               "month": 6,
-              "performance": 90,
-              "status": "Good"
+              "realisasi": 75
             },
             {
               "month": 7,
-              "performance": 91,
-              "status": "Good"
+              "realisasi": 82
             },
             {
               "month": 8,
-              "performance": 92,
-              "status": "Good"
+              "realisasi": 88
             },
             {
               "month": 9,
-              "performance": 90,
-              "status": "Good"
+              "realisasi": 91
             },
             {
               "month": 10,
-              "performance": 93,
-              "status": "Good"
-            },
-            {
-              "month": 11,
-              "performance": null,
-              "status": null
-            },
-            {
-              "month": 12,
-              "performance": null,
-              "status": null
+              "realisasi": 94
             }
           ]
         },
         {
           "id": "ssd",
-          "target": 90,
           "monthly": [
             {
               "month": 1,
-              "performance": 80,
-              "status": "Warning"
+              "realisasi": 1.0
             },
             {
               "month": 2,
-              "performance": 82,
-              "status": "Warning"
+              "realisasi": 2.0
             },
             {
               "month": 3,
-              "performance": 84,
-              "status": "Warning"
+              "realisasi": 3.2
             },
             {
               "month": 4,
-              "performance": 83,
-              "status": "Warning"
+              "realisasi": 4.5
             },
             {
               "month": 5,
-              "performance": 86,
-              "status": "Warning"
+              "realisasi": 5.5
             },
             {
               "month": 6,
-              "performance": 88,
-              "status": "Warning"
+              "realisasi": 6.5
             },
             {
               "month": 7,
-              "performance": 87,
-              "status": "Warning"
+              "realisasi": 7.4
             },
             {
               "month": 8,
-              "performance": 89,
-              "status": "Warning"
+              "realisasi": 8.2
             },
             {
               "month": 9,
-              "performance": 90,
-              "status": "Good"
+              "realisasi": 8.9
             },
             {
               "month": 10,
-              "performance": 91,
-              "status": "Good"
-            },
-            {
-              "month": 11,
-              "performance": null,
-              "status": null
-            },
-            {
-              "month": 12,
-              "performance": null,
-              "status": null
+              "realisasi": 9.4
             }
           ]
         }
@@ -540,530 +372,426 @@
     "2025": {
       "indicators": [
         {
-          "id": "zfr",
-          "target": 100,
+          "id": "fatality",
           "monthly": [
             {
               "month": 1,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 2,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 3,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 4,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 5,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 6,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 7,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 8,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 9,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 10,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 11,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 12,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             }
           ]
         },
         {
           "id": "ltifr",
-          "target": 95,
           "monthly": [
             {
               "month": 1,
-              "performance": 90,
-              "status": "Warning"
+              "realisasi": 0
             },
             {
               "month": 2,
-              "performance": 91,
-              "status": "Warning"
+              "realisasi": 0
             },
             {
               "month": 3,
-              "performance": 93,
-              "status": "Warning"
+              "realisasi": 0.1
             },
             {
               "month": 4,
-              "performance": 92,
-              "status": "Warning"
+              "realisasi": 0.12
             },
             {
               "month": 5,
-              "performance": 94,
-              "status": "Warning"
+              "realisasi": 0.15
             },
             {
               "month": 6,
-              "performance": 95,
-              "status": "Good"
+              "realisasi": 0.14
             },
             {
               "month": 7,
-              "performance": 93,
-              "status": "Warning"
+              "realisasi": 0.16
             },
             {
               "month": 8,
-              "performance": 96,
-              "status": "Good"
+              "realisasi": 0.17
             },
             {
               "month": 9,
-              "performance": 94,
-              "status": "Warning"
+              "realisasi": 0.19
             },
             {
               "month": 10,
-              "performance": 95,
-              "status": "Good"
+              "realisasi": 0.3
             },
             {
               "month": 11,
-              "performance": 96,
-              "status": "Good"
+              "realisasi": 0.29
             },
             {
               "month": 12,
-              "performance": 97,
-              "status": "Good"
+              "realisasi": 0.28
             }
           ]
         },
         {
           "id": "ltisr",
-          "target": 90,
           "monthly": [
             {
               "month": 1,
-              "performance": 75,
-              "status": "Critical"
+              "realisasi": 0
             },
             {
               "month": 2,
-              "performance": 77,
-              "status": "Critical"
+              "realisasi": 0
             },
             {
               "month": 3,
-              "performance": 80,
-              "status": "Warning"
+              "realisasi": 2.4
             },
             {
               "month": 4,
-              "performance": 82,
-              "status": "Warning"
+              "realisasi": 3.1
             },
             {
               "month": 5,
-              "performance": 81,
-              "status": "Warning"
+              "realisasi": 3.8
             },
             {
               "month": 6,
-              "performance": 84,
-              "status": "Warning"
+              "realisasi": 3.6
             },
             {
               "month": 7,
-              "performance": 86,
-              "status": "Warning"
+              "realisasi": 4.0
             },
             {
               "month": 8,
-              "performance": 85,
-              "status": "Warning"
+              "realisasi": 4.2
             },
             {
               "month": 9,
-              "performance": 87,
-              "status": "Warning"
+              "realisasi": 4.5
             },
             {
               "month": 10,
-              "performance": 88,
-              "status": "Warning"
+              "realisasi": 5.2
             },
             {
               "month": 11,
-              "performance": 90,
-              "status": "Good"
+              "realisasi": 5.0
             },
             {
               "month": 12,
-              "performance": 91,
-              "status": "Good"
+              "realisasi": 4.9
             }
           ]
         },
         {
           "id": "nofa",
-          "target": 100,
           "monthly": [
             {
               "month": 1,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 2,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 3,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 4,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 5,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 6,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 0
             },
             {
               "month": 7,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 1
             },
             {
               "month": 8,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 1
             },
             {
               "month": 9,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 1
             },
             {
               "month": 10,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 1
             },
             {
               "month": 11,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 1
             },
             {
               "month": 12,
-              "performance": 100,
-              "status": "Good"
+              "realisasi": 1
             }
           ]
         },
         {
           "id": "sot",
-          "target": 90,
           "monthly": [
             {
               "month": 1,
-              "performance": 85,
-              "status": "Warning"
+              "realisasi": 1.2
             },
             {
               "month": 2,
-              "performance": 87,
-              "status": "Warning"
+              "realisasi": 1.4
             },
             {
               "month": 3,
-              "performance": 88,
-              "status": "Warning"
+              "realisasi": 1.5
             },
             {
               "month": 4,
-              "performance": 90,
-              "status": "Good"
+              "realisasi": 1.6
             },
             {
               "month": 5,
-              "performance": 89,
-              "status": "Warning"
+              "realisasi": 1.7
             },
             {
               "month": 6,
-              "performance": 91,
-              "status": "Good"
+              "realisasi": 1.8
             },
             {
               "month": 7,
-              "performance": 92,
-              "status": "Good"
+              "realisasi": 1.8
             },
             {
               "month": 8,
-              "performance": 90,
-              "status": "Good"
+              "realisasi": 1.9
             },
             {
               "month": 9,
-              "performance": 93,
-              "status": "Good"
+              "realisasi": 1.9
             },
             {
               "month": 10,
-              "performance": 92,
-              "status": "Good"
+              "realisasi": 2.0
             },
             {
               "month": 11,
-              "performance": 94,
-              "status": "Good"
+              "realisasi": 2.0
             },
             {
               "month": 12,
-              "performance": 95,
-              "status": "Good"
+              "realisasi": 2.1
             }
           ]
         },
         {
           "id": "mcu",
-          "target": 95,
           "monthly": [
             {
               "month": 1,
-              "performance": 82,
-              "status": "Critical"
+              "realisasi": 8
             },
             {
               "month": 2,
-              "performance": 84,
-              "status": "Critical"
+              "realisasi": 18
             },
             {
               "month": 3,
-              "performance": 86,
-              "status": "Warning"
+              "realisasi": 30
             },
             {
               "month": 4,
-              "performance": 88,
-              "status": "Warning"
+              "realisasi": 42
             },
             {
               "month": 5,
-              "performance": 90,
-              "status": "Warning"
+              "realisasi": 55
             },
             {
               "month": 6,
-              "performance": 91,
-              "status": "Warning"
+              "realisasi": 63
             },
             {
               "month": 7,
-              "performance": 92,
-              "status": "Warning"
+              "realisasi": 70
             },
             {
               "month": 8,
-              "performance": 93,
-              "status": "Warning"
+              "realisasi": 78
             },
             {
               "month": 9,
-              "performance": 94,
-              "status": "Warning"
+              "realisasi": 85
             },
             {
               "month": 10,
-              "performance": 95,
-              "status": "Good"
+              "realisasi": 92
             },
             {
               "month": 11,
-              "performance": 95,
-              "status": "Good"
+              "realisasi": 97
             },
             {
               "month": 12,
-              "performance": 96,
-              "status": "Good"
+              "realisasi": 100
             }
           ]
         },
         {
           "id": "cam",
-          "target": 90,
           "monthly": [
             {
               "month": 1,
-              "performance": 78,
-              "status": "Critical"
+              "realisasi": 5
             },
             {
               "month": 2,
-              "performance": 80,
-              "status": "Warning"
+              "realisasi": 12
             },
             {
               "month": 3,
-              "performance": 82,
-              "status": "Warning"
+              "realisasi": 22
             },
             {
               "month": 4,
-              "performance": 83,
-              "status": "Warning"
+              "realisasi": 33
             },
             {
               "month": 5,
-              "performance": 85,
-              "status": "Warning"
+              "realisasi": 45
             },
             {
               "month": 6,
-              "performance": 86,
-              "status": "Warning"
+              "realisasi": 55
             },
             {
               "month": 7,
-              "performance": 88,
-              "status": "Warning"
+              "realisasi": 63
             },
             {
               "month": 8,
-              "performance": 87,
-              "status": "Warning"
+              "realisasi": 72
             },
             {
               "month": 9,
-              "performance": 89,
-              "status": "Warning"
+              "realisasi": 80
             },
             {
               "month": 10,
-              "performance": 90,
-              "status": "Good"
+              "realisasi": 88
             },
             {
               "month": 11,
-              "performance": 91,
-              "status": "Good"
+              "realisasi": 95
             },
             {
               "month": 12,
-              "performance": 92,
-              "status": "Good"
+              "realisasi": 100
             }
           ]
         },
         {
           "id": "ssd",
-          "target": 90,
           "monthly": [
             {
               "month": 1,
-              "performance": 70,
-              "status": "Critical"
+              "realisasi": 0.8
             },
             {
               "month": 2,
-              "performance": 72,
-              "status": "Critical"
+              "realisasi": 1.7
             },
             {
               "month": 3,
-              "performance": 75,
-              "status": "Critical"
+              "realisasi": 2.6
             },
             {
               "month": 4,
-              "performance": 78,
-              "status": "Critical"
+              "realisasi": 3.5
             },
             {
               "month": 5,
-              "performance": 80,
-              "status": "Warning"
+              "realisasi": 4.5
             },
             {
               "month": 6,
-              "performance": 82,
-              "status": "Warning"
+              "realisasi": 5.4
             },
             {
               "month": 7,
-              "performance": 83,
-              "status": "Warning"
+              "realisasi": 6.3
             },
             {
               "month": 8,
-              "performance": 85,
-              "status": "Warning"
+              "realisasi": 7.2
             },
             {
               "month": 9,
-              "performance": 86,
-              "status": "Warning"
+              "realisasi": 8.0
             },
             {
               "month": 10,
-              "performance": 88,
-              "status": "Warning"
+              "realisasi": 8.8
             },
             {
               "month": 11,
-              "performance": 89,
-              "status": "Warning"
+              "realisasi": 9.5
             },
             {
               "month": 12,
-              "performance": 90,
-              "status": "Good"
+              "realisasi": 10.2
             }
           ]
         }

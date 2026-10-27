@@ -94,6 +94,11 @@
 
         <!-- Dashboard -->
         <div id="dashboard" hidden>
+          <section aria-labelledby="totalHeading" class="section">
+            <h2 class="visually-hidden" id="totalHeading">Total Performance</h2>
+            <div class="total-card" id="totalCard"></div>
+          </section>
+
           <section aria-labelledby="kpiHeading" class="section">
             <div class="section-head">
               <h2 class="section-title" id="kpiHeading">
@@ -127,11 +132,13 @@
                 </div>
                 <p class="chart-note" id="chartNote"></p>
                 <!-- Alternatif teks untuk pembaca layar -->
-                <table class="visually-hidden" id="chartTable">
-                  <caption>Data tren bulanan</caption>
-                  <thead><tr><th scope="col">Bulan</th><th scope="col">Performa (%)</th><th scope="col">Status</th></tr></thead>
-                  <tbody></tbody>
-                </table>
+                <div class="visually-hidden">
+                  <table id="chartTable">
+                    <caption>Data tren bulanan</caption>
+                    <thead><tr><th scope="col">Bulan</th><th scope="col">Realisasi</th><th scope="col">Skor (%)</th><th scope="col">Status</th></tr></thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
               </div>
             </section>
 
@@ -238,6 +245,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
     <script src="https://unpkg.com/lucide@0.456.0/dist/umd/lucide.min.js"></script>
     <script src="assets/js/config.js"></script>
+    <script src="assets/js/scoring.js"></script>
     <script src="assets/js/data-service.js"></script>
     <script src="assets/js/info.js"></script>
     <script src="assets/js/dashboard.js"></script>
