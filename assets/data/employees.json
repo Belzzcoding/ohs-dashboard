@@ -1,0 +1,1128 @@
+{
+  "meta": {
+    "isMockData": true,
+    "note": "DATA CONTOH. Nama unit dan angka hanya placeholder pengembangan, bukan data resmi."
+  },
+  "rows": [
+    {
+      "year": 2025,
+      "month": 1,
+      "unit": "Unit Contoh A",
+      "tetap": 111,
+      "kontrak": 14
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "unit": "Unit Contoh B",
+      "tetap": 120,
+      "kontrak": 8
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "unit": "Unit Contoh C",
+      "tetap": 80,
+      "kontrak": 43
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "unit": "Unit Contoh D",
+      "tetap": 82,
+      "kontrak": 33
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "unit": "Unit Contoh E",
+      "tetap": 144,
+      "kontrak": 10
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "unit": "Unit Contoh F",
+      "tetap": 187,
+      "kontrak": 37
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "unit": "Unit Contoh G",
+      "tetap": 98,
+      "kontrak": 12
+    },
+    {
+      "year": 2025,
+      "month": 1,
+      "unit": "Unit Contoh H",
+      "tetap": 81,
+      "kontrak": 35
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "unit": "Unit Contoh A",
+      "tetap": 111,
+      "kontrak": 14
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "unit": "Unit Contoh B",
+      "tetap": 121,
+      "kontrak": 10
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "unit": "Unit Contoh C",
+      "tetap": 78,
+      "kontrak": 43
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "unit": "Unit Contoh D",
+      "tetap": 82,
+      "kontrak": 33
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "unit": "Unit Contoh E",
+      "tetap": 144,
+      "kontrak": 13
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "unit": "Unit Contoh F",
+      "tetap": 185,
+      "kontrak": 42
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "unit": "Unit Contoh G",
+      "tetap": 97,
+      "kontrak": 7
+    },
+    {
+      "year": 2025,
+      "month": 2,
+      "unit": "Unit Contoh H",
+      "tetap": 82,
+      "kontrak": 35
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "unit": "Unit Contoh A",
+      "tetap": 111,
+      "kontrak": 17
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "unit": "Unit Contoh B",
+      "tetap": 120,
+      "kontrak": 13
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "unit": "Unit Contoh C",
+      "tetap": 79,
+      "kontrak": 44
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "unit": "Unit Contoh D",
+      "tetap": 82,
+      "kontrak": 33
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "unit": "Unit Contoh E",
+      "tetap": 144,
+      "kontrak": 12
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "unit": "Unit Contoh F",
+      "tetap": 187,
+      "kontrak": 41
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "unit": "Unit Contoh G",
+      "tetap": 96,
+      "kontrak": 11
+    },
+    {
+      "year": 2025,
+      "month": 3,
+      "unit": "Unit Contoh H",
+      "tetap": 82,
+      "kontrak": 35
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "unit": "Unit Contoh A",
+      "tetap": 110,
+      "kontrak": 17
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "unit": "Unit Contoh B",
+      "tetap": 120,
+      "kontrak": 10
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "unit": "Unit Contoh C",
+      "tetap": 79,
+      "kontrak": 39
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "unit": "Unit Contoh D",
+      "tetap": 83,
+      "kontrak": 31
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "unit": "Unit Contoh E",
+      "tetap": 145,
+      "kontrak": 12
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "unit": "Unit Contoh F",
+      "tetap": 185,
+      "kontrak": 44
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "unit": "Unit Contoh G",
+      "tetap": 97,
+      "kontrak": 10
+    },
+    {
+      "year": 2025,
+      "month": 4,
+      "unit": "Unit Contoh H",
+      "tetap": 82,
+      "kontrak": 34
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "unit": "Unit Contoh A",
+      "tetap": 111,
+      "kontrak": 19
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "unit": "Unit Contoh B",
+      "tetap": 120,
+      "kontrak": 10
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "unit": "Unit Contoh C",
+      "tetap": 78,
+      "kontrak": 41
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "unit": "Unit Contoh D",
+      "tetap": 82,
+      "kontrak": 32
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "unit": "Unit Contoh E",
+      "tetap": 144,
+      "kontrak": 15
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "unit": "Unit Contoh F",
+      "tetap": 186,
+      "kontrak": 42
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "unit": "Unit Contoh G",
+      "tetap": 98,
+      "kontrak": 10
+    },
+    {
+      "year": 2025,
+      "month": 5,
+      "unit": "Unit Contoh H",
+      "tetap": 80,
+      "kontrak": 34
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "unit": "Unit Contoh A",
+      "tetap": 110,
+      "kontrak": 19
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "unit": "Unit Contoh B",
+      "tetap": 120,
+      "kontrak": 13
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "unit": "Unit Contoh C",
+      "tetap": 79,
+      "kontrak": 39
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "unit": "Unit Contoh D",
+      "tetap": 82,
+      "kontrak": 31
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "unit": "Unit Contoh E",
+      "tetap": 144,
+      "kontrak": 15
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "unit": "Unit Contoh F",
+      "tetap": 186,
+      "kontrak": 37
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "unit": "Unit Contoh G",
+      "tetap": 96,
+      "kontrak": 14
+    },
+    {
+      "year": 2025,
+      "month": 6,
+      "unit": "Unit Contoh H",
+      "tetap": 82,
+      "kontrak": 34
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "unit": "Unit Contoh A",
+      "tetap": 110,
+      "kontrak": 17
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "unit": "Unit Contoh B",
+      "tetap": 119,
+      "kontrak": 15
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "unit": "Unit Contoh C",
+      "tetap": 77,
+      "kontrak": 39
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "unit": "Unit Contoh D",
+      "tetap": 81,
+      "kontrak": 31
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "unit": "Unit Contoh E",
+      "tetap": 143,
+      "kontrak": 13
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "unit": "Unit Contoh F",
+      "tetap": 185,
+      "kontrak": 41
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "unit": "Unit Contoh G",
+      "tetap": 96,
+      "kontrak": 9
+    },
+    {
+      "year": 2025,
+      "month": 7,
+      "unit": "Unit Contoh H",
+      "tetap": 79,
+      "kontrak": 33
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "unit": "Unit Contoh A",
+      "tetap": 110,
+      "kontrak": 18
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "unit": "Unit Contoh B",
+      "tetap": 119,
+      "kontrak": 12
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "unit": "Unit Contoh C",
+      "tetap": 78,
+      "kontrak": 41
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "unit": "Unit Contoh D",
+      "tetap": 81,
+      "kontrak": 32
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "unit": "Unit Contoh E",
+      "tetap": 144,
+      "kontrak": 11
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "unit": "Unit Contoh F",
+      "tetap": 185,
+      "kontrak": 41
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "unit": "Unit Contoh G",
+      "tetap": 97,
+      "kontrak": 10
+    },
+    {
+      "year": 2025,
+      "month": 8,
+      "unit": "Unit Contoh H",
+      "tetap": 80,
+      "kontrak": 33
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "unit": "Unit Contoh A",
+      "tetap": 110,
+      "kontrak": 16
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "unit": "Unit Contoh B",
+      "tetap": 119,
+      "kontrak": 8
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "unit": "Unit Contoh C",
+      "tetap": 78,
+      "kontrak": 41
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "unit": "Unit Contoh D",
+      "tetap": 81,
+      "kontrak": 35
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "unit": "Unit Contoh E",
+      "tetap": 143,
+      "kontrak": 8
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "unit": "Unit Contoh F",
+      "tetap": 185,
+      "kontrak": 42
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "unit": "Unit Contoh G",
+      "tetap": 96,
+      "kontrak": 10
+    },
+    {
+      "year": 2025,
+      "month": 9,
+      "unit": "Unit Contoh H",
+      "tetap": 79,
+      "kontrak": 33
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "unit": "Unit Contoh A",
+      "tetap": 110,
+      "kontrak": 18
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "unit": "Unit Contoh B",
+      "tetap": 120,
+      "kontrak": 11
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "unit": "Unit Contoh C",
+      "tetap": 79,
+      "kontrak": 44
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "unit": "Unit Contoh D",
+      "tetap": 80,
+      "kontrak": 30
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "unit": "Unit Contoh E",
+      "tetap": 144,
+      "kontrak": 13
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "unit": "Unit Contoh F",
+      "tetap": 185,
+      "kontrak": 41
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "unit": "Unit Contoh G",
+      "tetap": 97,
+      "kontrak": 11
+    },
+    {
+      "year": 2025,
+      "month": 10,
+      "unit": "Unit Contoh H",
+      "tetap": 80,
+      "kontrak": 32
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "unit": "Unit Contoh A",
+      "tetap": 110,
+      "kontrak": 14
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "unit": "Unit Contoh B",
+      "tetap": 119,
+      "kontrak": 15
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "unit": "Unit Contoh C",
+      "tetap": 78,
+      "kontrak": 39
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "unit": "Unit Contoh D",
+      "tetap": 81,
+      "kontrak": 28
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "unit": "Unit Contoh E",
+      "tetap": 143,
+      "kontrak": 12
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "unit": "Unit Contoh F",
+      "tetap": 185,
+      "kontrak": 37
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "unit": "Unit Contoh G",
+      "tetap": 95,
+      "kontrak": 12
+    },
+    {
+      "year": 2025,
+      "month": 11,
+      "unit": "Unit Contoh H",
+      "tetap": 80,
+      "kontrak": 32
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "unit": "Unit Contoh A",
+      "tetap": 110,
+      "kontrak": 19
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "unit": "Unit Contoh B",
+      "tetap": 119,
+      "kontrak": 13
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "unit": "Unit Contoh C",
+      "tetap": 78,
+      "kontrak": 42
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "unit": "Unit Contoh D",
+      "tetap": 82,
+      "kontrak": 28
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "unit": "Unit Contoh E",
+      "tetap": 143,
+      "kontrak": 10
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "unit": "Unit Contoh F",
+      "tetap": 186,
+      "kontrak": 41
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "unit": "Unit Contoh G",
+      "tetap": 96,
+      "kontrak": 14
+    },
+    {
+      "year": 2025,
+      "month": 12,
+      "unit": "Unit Contoh H",
+      "tetap": 79,
+      "kontrak": 32
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "unit": "Unit Contoh A",
+      "tetap": 110,
+      "kontrak": 17
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "unit": "Unit Contoh B",
+      "tetap": 118,
+      "kontrak": 8
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "unit": "Unit Contoh C",
+      "tetap": 77,
+      "kontrak": 43
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "unit": "Unit Contoh D",
+      "tetap": 80,
+      "kontrak": 32
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "unit": "Unit Contoh E",
+      "tetap": 142,
+      "kontrak": 11
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "unit": "Unit Contoh F",
+      "tetap": 184,
+      "kontrak": 39
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "unit": "Unit Contoh G",
+      "tetap": 95,
+      "kontrak": 14
+    },
+    {
+      "year": 2026,
+      "month": 1,
+      "unit": "Unit Contoh H",
+      "tetap": 78,
+      "kontrak": 31
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "unit": "Unit Contoh A",
+      "tetap": 108,
+      "kontrak": 18
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "unit": "Unit Contoh B",
+      "tetap": 118,
+      "kontrak": 13
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "unit": "Unit Contoh C",
+      "tetap": 77,
+      "kontrak": 41
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "unit": "Unit Contoh D",
+      "tetap": 81,
+      "kontrak": 31
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "unit": "Unit Contoh E",
+      "tetap": 142,
+      "kontrak": 15
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "unit": "Unit Contoh F",
+      "tetap": 185,
+      "kontrak": 37
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "unit": "Unit Contoh G",
+      "tetap": 96,
+      "kontrak": 10
+    },
+    {
+      "year": 2026,
+      "month": 2,
+      "unit": "Unit Contoh H",
+      "tetap": 79,
+      "kontrak": 31
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "unit": "Unit Contoh A",
+      "tetap": 108,
+      "kontrak": 19
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "unit": "Unit Contoh B",
+      "tetap": 117,
+      "kontrak": 10
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "unit": "Unit Contoh C",
+      "tetap": 76,
+      "kontrak": 41
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "unit": "Unit Contoh D",
+      "tetap": 81,
+      "kontrak": 33
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "unit": "Unit Contoh E",
+      "tetap": 143,
+      "kontrak": 11
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "unit": "Unit Contoh F",
+      "tetap": 184,
+      "kontrak": 42
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "unit": "Unit Contoh G",
+      "tetap": 95,
+      "kontrak": 9
+    },
+    {
+      "year": 2026,
+      "month": 3,
+      "unit": "Unit Contoh H",
+      "tetap": 79,
+      "kontrak": 31
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "unit": "Unit Contoh A",
+      "tetap": 109,
+      "kontrak": 16
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "unit": "Unit Contoh B",
+      "tetap": 119,
+      "kontrak": 12
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "unit": "Unit Contoh C",
+      "tetap": 76,
+      "kontrak": 46
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "unit": "Unit Contoh D",
+      "tetap": 80,
+      "kontrak": 28
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "unit": "Unit Contoh E",
+      "tetap": 141,
+      "kontrak": 12
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "unit": "Unit Contoh F",
+      "tetap": 183,
+      "kontrak": 39
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "unit": "Unit Contoh G",
+      "tetap": 96,
+      "kontrak": 10
+    },
+    {
+      "year": 2026,
+      "month": 4,
+      "unit": "Unit Contoh H",
+      "tetap": 79,
+      "kontrak": 30
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "unit": "Unit Contoh A",
+      "tetap": 108,
+      "kontrak": 17
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "unit": "Unit Contoh B",
+      "tetap": 118,
+      "kontrak": 10
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "unit": "Unit Contoh C",
+      "tetap": 77,
+      "kontrak": 41
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "unit": "Unit Contoh D",
+      "tetap": 80,
+      "kontrak": 30
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "unit": "Unit Contoh E",
+      "tetap": 141,
+      "kontrak": 10
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "unit": "Unit Contoh F",
+      "tetap": 184,
+      "kontrak": 42
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "unit": "Unit Contoh G",
+      "tetap": 96,
+      "kontrak": 7
+    },
+    {
+      "year": 2026,
+      "month": 5,
+      "unit": "Unit Contoh H",
+      "tetap": 79,
+      "kontrak": 30
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "unit": "Unit Contoh A",
+      "tetap": 108,
+      "kontrak": 21
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "unit": "Unit Contoh B",
+      "tetap": 118,
+      "kontrak": 15
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "unit": "Unit Contoh C",
+      "tetap": 77,
+      "kontrak": 43
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "unit": "Unit Contoh D",
+      "tetap": 80,
+      "kontrak": 32
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "unit": "Unit Contoh E",
+      "tetap": 142,
+      "kontrak": 12
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "unit": "Unit Contoh F",
+      "tetap": 183,
+      "kontrak": 37
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "unit": "Unit Contoh G",
+      "tetap": 95,
+      "kontrak": 11
+    },
+    {
+      "year": 2026,
+      "month": 6,
+      "unit": "Unit Contoh H",
+      "tetap": 79,
+      "kontrak": 30
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "unit": "Unit Contoh A",
+      "tetap": 108,
+      "kontrak": 21
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "unit": "Unit Contoh B",
+      "tetap": 117,
+      "kontrak": 10
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "unit": "Unit Contoh C",
+      "tetap": 76,
+      "kontrak": 39
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "unit": "Unit Contoh D",
+      "tetap": 79,
+      "kontrak": 33
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "unit": "Unit Contoh E",
+      "tetap": 141,
+      "kontrak": 15
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "unit": "Unit Contoh F",
+      "tetap": 183,
+      "kontrak": 42
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "unit": "Unit Contoh G",
+      "tetap": 95,
+      "kontrak": 11
+    },
+    {
+      "year": 2026,
+      "month": 7,
+      "unit": "Unit Contoh H",
+      "tetap": 77,
+      "kontrak": 29
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "unit": "Unit Contoh A",
+      "tetap": 109,
+      "kontrak": 19
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "unit": "Unit Contoh B",
+      "tetap": 117,
+      "kontrak": 8
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "unit": "Unit Contoh C",
+      "tetap": 76,
+      "kontrak": 46
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "unit": "Unit Contoh D",
+      "tetap": 79,
+      "kontrak": 33
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "unit": "Unit Contoh E",
+      "tetap": 141,
+      "kontrak": 12
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "unit": "Unit Contoh F",
+      "tetap": 183,
+      "kontrak": 39
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "unit": "Unit Contoh G",
+      "tetap": 94,
+      "kontrak": 10
+    },
+    {
+      "year": 2026,
+      "month": 8,
+      "unit": "Unit Contoh H",
+      "tetap": 78,
+      "kontrak": 29
+    }
+  ]
+}

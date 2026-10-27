@@ -200,6 +200,10 @@
       loadData();
       Info.start();
     }
+    
+    // bagian khusus halaman Karyawan
+    if ($("employees")) Employees.start();
+    
     ohsUtils.icons();
   });
 })();

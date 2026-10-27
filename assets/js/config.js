@@ -1,10 +1,3 @@
-/* ==========================================================
-  config.js
-    Semua hal yang bisa berubah ada di sini: link eksternal, daftar indikator, menu, sumber data, dan label.
-    File ini TIDAK berisi logika bisnis OHS (rumus / ambang batas).
-    Status Good / Warning / Critical dibaca dari data.
-  ========================================================== */
-
 /* ---------- 1. Link eksternal OHS ----------
   Kosongkan ("") bila belum ada. Kartu / menu dengan link kosong atau tidak valid otomatis dinonaktifkan (tidak ada link rusak).
   Hanya URL berawalan https:// yang diterima.
@@ -48,6 +41,12 @@ const infoSource = {
   localUrl: "assets/data/info.json",
   sheetsCsvUrl:
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4hLSBN-nkOOZeSgNpld2cdVRqUsfsxi03tugmqHKjAkm3plM81wfgwHQwzLJIg171CPyhjRqrYNG/pub?gid=779595226&single=true&output=csv",
+};
+
+const employeeSource = {
+  type: "local",
+  localUrl: "assets/data/employees.json",
+  sheetsCsvUrl: "",
 };
 
 /* ---------- 3. Pengaturan tampilan ---------- */
@@ -194,10 +193,38 @@ const ohsConfig = {
       href: "index.html",
     },
     {
+      id: "employees",
+      label: "Karyawan",
+      icon: "users",
+      href: "karyawan.html",
+    },
+    {
       id: "documents",
       label: "Dokumen",
       icon: "folder-open",
       href: "dokumen.html",
+    },
+  ],
+
+  /* Kartu KPI di halaman Karyawan. key = nama kolom hasil hitung (tetap, kontrak, total). */
+  employeeKpis: [
+    {
+      key: "total",
+      name: "Total Karyawan",
+      desc: "Tetap + Kontrak",
+      icon: "users",
+    },
+    {
+      key: "tetap",
+      name: "Karyawan Tetap",
+      desc: "Jumlah karyawan tetap.",
+      icon: "user-check",
+    },
+    {
+      key: "kontrak",
+      name: "Karyawan Kontrak",
+      desc: "Jumlah karyawan kontrak.",
+      icon: "user-plus",
     },
   ],
 
