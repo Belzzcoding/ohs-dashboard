@@ -57,12 +57,10 @@ const ohsConfig = {
   // Fitur KPI detail (modal)
   kpiDetailEnabled: true,
 
-  /* Skor total resmi (Katalog KPI Generic 2026 - Safety Performance).
-  capScore: ASUMSI SEMENTARA - skor LTIFR/LTISR dibatasi 0-100%.
-  Rumus katalog (2 - realisasi/target) bisa >100% atau negatif;
-  ubah ke false bila unit OHS menyatakan tidak dibatasi. */
+  /* Skor total resmi (Katalog KPI Generic 2026 - Safety Performance). */
   scoring: {
-    capScore: true,
+    capScore: false, // true = skor tiap indikator dibatasi 0-100; false = boleh <0 atau >100
+    capProgressScore: true,
     totalTarget: 90,
     totalLabel: "Skor Safety Performance",
     sourceNote: "Katalog KPI Generic 2026 – Safety Performance",
@@ -120,18 +118,19 @@ const ohsConfig = {
   ],
 
   /* 8 indikator. id harus sama dengan kolom "indicator" di sheet.
-      weight      : bobot dalam skor total (jumlah semua = 100)
-      rule.type   : "zero" | "rate" | "progress"   (penjelasan di scoring.js)
-      rule.target : (rate) batas realisasi; makin kecil makin baik
-      rule.fullAt : (progress) realisasi untuk nilai penuh 100%
-      rule.passAt : (progress) realisasi minimum agar berstatus Tercapai
-      rule.unit   : satuan realisasi
-      assumed     : true bila aturan masih ASUMSI sementara (menunggu unit OHS)
-      formulaText : rumus resmi (teks tampil di popup)
-      chartType   : "line" | "bar" | "doughnut" (grafik di popup)  */
+      weight         : bobot dalam skor total (jumlah semua = 100)
+      rule.type      : "zero" | "rate" | "progress"   (penjelasan di scoring.js)
+      rule.target    : (rate) batas realisasi; makin kecil makin baik
+      rule.passRatio : (progress) rasio realisasi/target agar Tercapai (default 1 = 100%)
+      rule.unit      : satuan realisasi
+      assumed        : true bila aturan masih ASUMSI sementara (menunggu unit OHS)
+      assumedNote    : kalimat yang tampil di popup bila assumed = true
+      formulaText    : rumus resmi (teks tampil di popup)
+      chartType      : "line" | "bar" | "doughnut" (grafik di popup)
+    Jenis "progress" (SOT, MCU, CAM, SSD) = jumlah ORANG. Targetnya berbeda tiap bulan dan diisi di kolom "target" di sheet, bukan di sini.  */
   indicators: [
     {
-      id: "fatality",
+      id: "zfr",
       name: "Fatality",
       fullName: "Zero Fatality Rate (ZFR)",
       icon: "shield-alert",
@@ -151,7 +150,7 @@ const ohsConfig = {
       weight: 10,
       rule: { type: "rate", target: 0.25 },
       formulaText:
-        "Realisasi LTIFR = (Jumlah accident × 1.000.000) ÷ Total jam kerja. Skor = 2 − (Realisasi ÷ Target).",
+        "Realisasi LTIFR = (Jumlah accident hilang hari kerja × 1.000.000) ÷ Total jam kerja (jam kerja kontraktor ikut dihitung). Skor = 2 − (Realisasi ÷ Target). Skor di atas 100% berarti lebih baik dari target.",
       explanationTemplate: "",
     },
     {
@@ -163,7 +162,7 @@ const ohsConfig = {
       weight: 10,
       rule: { type: "rate", target: 4.75 },
       formulaText:
-        "Realisasi LTISR = (Jumlah jam kerja hilang × 1.000.000) ÷ Total jam kerja. Skor = 2 − (Realisasi ÷ Target).",
+        "Realisasi LTISR = (Jumlah jam kerja hilang × 1.000.000) ÷ Total jam kerja (jam kerja kontraktor ikut dihitung). Skor = 2 − (Realisasi ÷ Target). Skor di atas 100% berarti lebih baik dari target.",
       explanationTemplate: "",
     },
     {
@@ -185,12 +184,13 @@ const ohsConfig = {
       icon: "eye",
       chartType: "bar",
       weight: 20,
-      rule: { type: "progress", fullAt: 2, passAt: 1, unit: "×/bulan" },
+      rule: { type: "progress", passRatio: 0.5, unit: "orang" },
       formulaText:
-        "Rata-rata karyawan melakukan SOT 2× per bulan (offline atau online) → 100%. Minimal 1× per bulan → 50% dan tetap Tercapai. Realisasi diisi rata-rata kali per bulan.",
-      explanationTemplate:
-        "Nilai di antara 1× dan 2× dihitung proporsional (asumsi sementara menunggu unit OHS).",
+        "Jumlah orang yang melaksanakan SOT dibanding target bulan itu (offline atau online). Skor = Realisasi ÷ Target. Capaian minimal 50% dari target tetap berstatus Tercapai.",
+      explanationTemplate: "",
       assumed: true,
+      assumedNote:
+        'Arti "jumlah orang" untuk SOT dan batas Tercapai 50% perlu dikonfirmasi unit OHS; skor dibatasi 100% (asumsi sementara).',
     },
     {
       id: "mcu",
@@ -199,12 +199,13 @@ const ohsConfig = {
       icon: "stethoscope",
       chartType: "line",
       weight: 10,
-      rule: { type: "progress", fullAt: 100, passAt: 100, unit: "%" },
+      rule: { type: "progress", unit: "orang" },
       formulaText:
-        "Persentase karyawan yang telah melakukan MCU (realisasi ÷ target). Realisasi diisi persen.",
-      explanationTemplate:
-        "Batas Tercapai = 100% adalah asumsi sementara menunggu unit OHS.",
+        "Jumlah karyawan yang telah melakukan MCU (kumulatif sejak Januari) dibanding target bulan itu. Skor = Realisasi ÷ Target. Tercapai bila jumlah orang terpenuhi.",
+      explanationTemplate: "",
       assumed: true,
+      assumedNote:
+        "Skor dibatasi 100% bila realisasi melebihi target (asumsi sementara menunggu unit OHS).",
     },
     {
       id: "cam",
@@ -213,12 +214,13 @@ const ohsConfig = {
       icon: "messages-square",
       chartType: "line",
       weight: 10,
-      rule: { type: "progress", fullAt: 100, passAt: 100, unit: "%" },
+      rule: { type: "progress", unit: "orang" },
       formulaText:
-        "Persentase karyawan yang telah konsultasi dengan dokter perusahaan setelah hasil MCU (realisasi ÷ target). Realisasi diisi persen.",
-      explanationTemplate:
-        "Batas Tercapai = 100% adalah asumsi sementara menunggu unit OHS.",
+        "Jumlah karyawan yang telah konsultasi dengan dokter perusahaan setelah hasil MCU (kumulatif sejak Januari) dibanding target bulan itu. Skor = Realisasi ÷ Target.",
+      explanationTemplate: "",
       assumed: true,
+      assumedNote:
+        "Skor dibatasi 100% bila realisasi melebihi target (asumsi sementara menunggu unit OHS).",
     },
     {
       id: "ssd",
@@ -227,11 +229,13 @@ const ohsConfig = {
       icon: "graduation-cap",
       chartType: "line",
       weight: 10,
-      rule: { type: "progress", fullAt: 10, passAt: 10, unit: "jam" },
+      rule: { type: "progress", unit: "orang" },
       formulaText:
-        "Self learning modul health & safety minimal 10 jam per tahun → 100%. Realisasi diisi rata-rata jam belajar per karyawan sejak Januari.",
-      explanationTemplate:
-        "Di tengah tahun nilainya menunjukkan progres menuju 10 jam, bukan target proporsional per bulan.",
+        "Jumlah karyawan yang telah mencapai minimal 10 jam self learning health & safety (kumulatif sejak Januari) dibanding target bulan itu. Skor = Realisasi ÷ Target.",
+      explanationTemplate: "",
+      assumed: true,
+      assumedNote:
+        "Skor dibatasi 100% bila realisasi melebihi target (asumsi sementara menunggu unit OHS).",
     },
   ],
 

@@ -43,7 +43,6 @@ const Employees = (function () {
   }
 
   /* ---------- 1. Memuat data ---------- */
-
   /* Sel kosong harus dianggap tidak ada (Number("") akan menjadi 0). */
   const toNumber = (v) =>
     v === null || v === undefined || String(v).trim() === "" ? NaN : Number(v);
@@ -117,7 +116,6 @@ const Employees = (function () {
   }
 
   /* ---------- 2. KPI ---------- */
-
   /* Periode data terbaru, dan periode sebelumnya (untuk selisih). */
   function findPeriods() {
     const keys = [
@@ -189,7 +187,6 @@ const Employees = (function () {
   }
 
   /* ---------- 3. Popup rincian per unit ---------- */
-
   function unitTable(focusKey) {
     const { year, month } = state.latest;
     const byUnit = {};
@@ -259,7 +256,6 @@ const Employees = (function () {
   }
 
   /* ---------- 4. Filter ---------- */
-
   function fillFilters() {
     const units = [...new Set(state.rows.map((r) => r.unit))].sort((a, b) =>
       a.localeCompare(b, "id"),
@@ -276,6 +272,12 @@ const Employees = (function () {
       cfg.monthsLong
         .map((m, i) => `<option value="${i + 1}">${m}</option>`)
         .join("");
+
+    if (years.length === 0) {
+      $("yearSelect").innerHTML = `<option value="">-</option>`;
+      return;
+    }
+
     $("yearSelect").innerHTML = years
       .map((y) => `<option value="${y}">${y}</option>`)
       .join("");

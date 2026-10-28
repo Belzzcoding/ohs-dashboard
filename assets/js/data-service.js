@@ -1,22 +1,9 @@
 /* ==========================================================
   data-service.js
-  
-  {
-    meta:  { isMockData, lastUpdated: "YYYY-MM-DD", note },
-      years: {
-        "2026": { indicators: [
-          { id, target, monthly: [ { month: 1..12, realisasi, performance, status } x12 ] }
-        ] }
-      }
-    }
-      
-    realisasi   = angka mentah dari sumber data (YTD, kumulatif sejak Januari)
-    performance = SKOR 0-100% hasil hitung Scoring
-    status      = "met" | "notMet" | null (hasil hitung Scoring)
-    target      = skor batas "Tercapai" (dipakai sebagai garis target grafik)
+  Satu-satunya file yang tahu DARI MANA data berasal.
 
-    Bulan tanpa data = realisasi/performance null (BUKAN 0).
-    Skor dan status dihitung oleh scoring.js, aturannya ada di config.js.
+  Bulan tanpa data = realisasi/performance null (BUKAN 0).
+  Skor dan status dihitung oleh scoring.js, aturannya ada di config.js.
    ========================================================== */
 
 const DataService = (() => {
@@ -43,10 +30,12 @@ const DataService = (() => {
       const m = byMonth[i + 1];
       const value = m ? toNumber(m.realisasi) : null;
       const realisasi = value !== null && value >= 0 ? value : null; // angka negatif dianggap tidak valid
-      const result = Scoring.evaluate(def, realisasi);
+      const target = m ? toNumber(m.target) : null;
+      const result = Scoring.evaluate(def, realisasi, target);
       return {
         month: i + 1,
-        realisasi: result ? realisasi : null,
+        realisasi,
+        target: target !== null && target > 0 ? target : null,
         performance: result ? result.score : null,
         status: result ? (result.passed ? "met" : "notMet") : null,
       };
@@ -55,12 +44,7 @@ const DataService = (() => {
 
   /* Validasi + rapikan model (dipakai oleh sumber lokal maupun Sheets). */
   function normalize(raw) {
-    if (
-      !raw ||
-      typeof raw !== "object" ||
-      !raw.years ||
-      typeof raw.years !== "object"
-    ) {
+    if (!raw || typeof raw !== "object" || !raw.years || typeof raw.years !== "object") {
       throw new Error(
         "Format data tidak dikenali: properti 'years' tidak ada.",
       );
@@ -70,9 +54,7 @@ const DataService = (() => {
       const list = (raw.years[year] && raw.years[year].indicators) || [];
       years[String(year)] = {
         indicators: list.map((ind) => {
-          const id = String(ind.id || "")
-            .trim()
-            .toLowerCase();
+          const id = String(ind.id || "").trim().toLowerCase();
           const def = ohsConfig.indicators.find((d) => d.id === id);
           return {
             id,
@@ -103,18 +85,14 @@ const DataService = (() => {
     return normalize(await res.json());
   }
 
-  /* ---------- Sumber 2: Google Sheets (CSV hasil "Publish to web") ----------
-  Kolom yang dibaca (baris pertama = header):
-      year, month, indicator, realisasi, last_updated
-  realisasi = angka YTD (kumulatif sejak Januari) dalam satuan masing-masing indikator. */
-
+  /* ---------- Sumber 2: Google Sheets (CSV hasil "Publish to web") ---------- */
   /* Parser CSV kecil yang paham tanda kutip. Mengembalikan array of array. */
   function parseCsv(text) {
     const rows = [];
     let row = [];
     let cell = "";
     let inQuotes = false;
-    const src = String(text).replace(/^﻿/, "");
+    const src = String(text).replace(/^/, "");
     for (let i = 0; i < src.length; i++) {
       const ch = src[i];
       if (inQuotes) {
@@ -169,7 +147,7 @@ const DataService = (() => {
 
       const y = (years[year] = years[year] || { indicators: {} });
       const ind = (y.indicators[id] = y.indicators[id] || { id, monthly: [] });
-      ind.monthly.push({ month, realisasi: get("realisasi") });
+      ind.monthly.push({ month, realisasi: get("realisasi"), target: get("target") });
 
       const lu = String(get("last_updated")).trim();
       if (/^\d{4}-\d{2}-\d{2}/.test(lu) && (!lastUpdated || lu > lastUpdated))

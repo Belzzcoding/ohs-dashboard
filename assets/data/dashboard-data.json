@@ -2,7 +2,7 @@
   "meta": {
     "isMockData": true,
     "lastUpdated": "2026-10-06",
-    "note": "MOCK DATA. Angka realisasi hanya placeholder, bukan data resmi OHS."
+    "note": "MOCK DATA. Angka realisasi dan target hanya placeholder, bukan data resmi OHS."
   },
   "years": {
     "2026": {
@@ -106,7 +106,7 @@
             },
             {
               "month": 2,
-              "realisasi": 0
+              "realisasi": 1.2
             },
             {
               "month": 3,
@@ -192,43 +192,53 @@
           "monthly": [
             {
               "month": 1,
-              "realisasi": 1.4
+              "realisasi": 780,
+              "target": 900
             },
             {
               "month": 2,
-              "realisasi": 1.6
+              "realisasi": 830,
+              "target": 900
             },
             {
               "month": 3,
-              "realisasi": 1.7
+              "realisasi": 910,
+              "target": 950
             },
             {
               "month": 4,
-              "realisasi": 1.8
+              "realisasi": 930,
+              "target": 950
             },
             {
               "month": 5,
-              "realisasi": 1.9
+              "realisasi": 960,
+              "target": 1000
             },
             {
               "month": 6,
-              "realisasi": 1.9
+              "realisasi": 1000,
+              "target": 1000
             },
             {
               "month": 7,
-              "realisasi": 2.0
+              "realisasi": 1020,
+              "target": 1000
             },
             {
               "month": 8,
-              "realisasi": 2.1
+              "realisasi": 990,
+              "target": 1000
             },
             {
               "month": 9,
-              "realisasi": 2.1
+              "realisasi": 1000,
+              "target": 1000
             },
             {
               "month": 10,
-              "realisasi": 2.2
+              "realisasi": 1010,
+              "target": 1000
             }
           ]
         },
@@ -237,43 +247,53 @@
           "monthly": [
             {
               "month": 1,
-              "realisasi": 20
+              "realisasi": 58,
+              "target": 60
             },
             {
               "month": 2,
-              "realisasi": 35
+              "realisasi": 135,
+              "target": 130
             },
             {
               "month": 3,
-              "realisasi": 50
+              "realisasi": 210,
+              "target": 220
             },
             {
               "month": 4,
-              "realisasi": 60
+              "realisasi": 300,
+              "target": 320
             },
             {
               "month": 5,
-              "realisasi": 72
+              "realisasi": 415,
+              "target": 430
             },
             {
               "month": 6,
-              "realisasi": 80
+              "realisasi": 530,
+              "target": 540
             },
             {
               "month": 7,
-              "realisasi": 88
+              "realisasi": 640,
+              "target": 650
             },
             {
               "month": 8,
-              "realisasi": 92
+              "realisasi": 745,
+              "target": 760
             },
             {
               "month": 9,
-              "realisasi": 95
+              "realisasi": 840,
+              "target": 860
             },
             {
               "month": 10,
-              "realisasi": 97
+              "realisasi": 925,
+              "target": 930
             }
           ]
         },
@@ -282,43 +302,53 @@
           "monthly": [
             {
               "month": 1,
-              "realisasi": 15
+              "realisasi": 38,
+              "target": 40
             },
             {
               "month": 2,
-              "realisasi": 30
+              "realisasi": 80,
+              "target": 90
             },
             {
               "month": 3,
-              "realisasi": 45
+              "realisasi": 150,
+              "target": 160
             },
             {
               "month": 4,
-              "realisasi": 55
+              "realisasi": 225,
+              "target": 240
             },
             {
               "month": 5,
-              "realisasi": 68
+              "realisasi": 310,
+              "target": 330
             },
             {
               "month": 6,
-              "realisasi": 75
+              "realisasi": 410,
+              "target": 430
             },
             {
               "month": 7,
-              "realisasi": 82
+              "realisasi": 515,
+              "target": 530
             },
             {
               "month": 8,
-              "realisasi": 88
+              "realisasi": 600,
+              "target": 630
             },
             {
               "month": 9,
-              "realisasi": 91
+              "realisasi": 700,
+              "target": 730
             },
             {
               "month": 10,
-              "realisasi": 94
+              "realisasi": 790,
+              "target": 810
             }
           ]
         },
@@ -327,43 +357,53 @@
           "monthly": [
             {
               "month": 1,
-              "realisasi": 1.0
+              "realisasi": 44,
+              "target": 50
             },
             {
               "month": 2,
-              "realisasi": 2.0
+              "realisasi": 110,
+              "target": 120
             },
             {
               "month": 3,
-              "realisasi": 3.2
+              "realisasi": 190,
+              "target": 200
             },
             {
               "month": 4,
-              "realisasi": 4.5
+              "realisasi": 285,
+              "target": 300
             },
             {
               "month": 5,
-              "realisasi": 5.5
+              "realisasi": 380,
+              "target": 400
             },
             {
               "month": 6,
-              "realisasi": 6.5
+              "realisasi": 500,
+              "target": 520
             },
             {
               "month": 7,
-              "realisasi": 7.4
+              "realisasi": 610,
+              "target": 640
             },
             {
               "month": 8,
-              "realisasi": 8.2
+              "realisasi": 720,
+              "target": 760
             },
             {
               "month": 9,
-              "realisasi": 8.9
+              "realisasi": 820,
+              "target": 850
             },
             {
               "month": 10,
-              "realisasi": 9.4
+              "realisasi": 880,
+              "target": 920
             }
           ]
         }
@@ -588,51 +628,63 @@
           "monthly": [
             {
               "month": 1,
-              "realisasi": 1.2
+              "realisasi": 430,
+              "target": 900
             },
             {
               "month": 2,
-              "realisasi": 1.4
+              "realisasi": 520,
+              "target": 900
             },
             {
               "month": 3,
-              "realisasi": 1.5
+              "realisasi": 600,
+              "target": 950
             },
             {
               "month": 4,
-              "realisasi": 1.6
+              "realisasi": 700,
+              "target": 950
             },
             {
               "month": 5,
-              "realisasi": 1.7
+              "realisasi": 760,
+              "target": 1000
             },
             {
               "month": 6,
-              "realisasi": 1.8
+              "realisasi": 820,
+              "target": 1000
             },
             {
               "month": 7,
-              "realisasi": 1.8
+              "realisasi": 860,
+              "target": 1000
             },
             {
               "month": 8,
-              "realisasi": 1.9
+              "realisasi": 900,
+              "target": 1000
             },
             {
               "month": 9,
-              "realisasi": 1.9
+              "realisasi": 940,
+              "target": 1000
             },
             {
               "month": 10,
-              "realisasi": 2.0
+              "realisasi": 980,
+              "target": 1000
             },
             {
               "month": 11,
-              "realisasi": 2.0
+              "realisasi": 1000,
+              "target": 1000
             },
             {
               "month": 12,
-              "realisasi": 2.1
+              "realisasi": 1000,
+              "target": 1000
             }
           ]
         },
@@ -641,51 +693,63 @@
           "monthly": [
             {
               "month": 1,
-              "realisasi": 8
+              "realisasi": 50,
+              "target": 60
             },
             {
               "month": 2,
-              "realisasi": 18
+              "realisasi": 110,
+              "target": 130
             },
             {
               "month": 3,
-              "realisasi": 30
+              "realisasi": 190,
+              "target": 220
             },
             {
               "month": 4,
-              "realisasi": 42
+              "realisasi": 290,
+              "target": 320
             },
             {
               "month": 5,
-              "realisasi": 55
+              "realisasi": 400,
+              "target": 430
             },
             {
               "month": 6,
-              "realisasi": 63
+              "realisasi": 500,
+              "target": 540
             },
             {
               "month": 7,
-              "realisasi": 70
+              "realisasi": 600,
+              "target": 650
             },
             {
               "month": 8,
-              "realisasi": 78
+              "realisasi": 700,
+              "target": 760
             },
             {
               "month": 9,
-              "realisasi": 85
+              "realisasi": 800,
+              "target": 860
             },
             {
               "month": 10,
-              "realisasi": 92
+              "realisasi": 880,
+              "target": 930
             },
             {
               "month": 11,
-              "realisasi": 97
+              "realisasi": 950,
+              "target": 970
             },
             {
               "month": 12,
-              "realisasi": 100
+              "realisasi": 1000,
+              "target": 1000
             }
           ]
         },
@@ -694,51 +758,63 @@
           "monthly": [
             {
               "month": 1,
-              "realisasi": 5
+              "realisasi": 30,
+              "target": 40
             },
             {
               "month": 2,
-              "realisasi": 12
+              "realisasi": 70,
+              "target": 90
             },
             {
               "month": 3,
-              "realisasi": 22
+              "realisasi": 140,
+              "target": 160
             },
             {
               "month": 4,
-              "realisasi": 33
+              "realisasi": 210,
+              "target": 240
             },
             {
               "month": 5,
-              "realisasi": 45
+              "realisasi": 300,
+              "target": 330
             },
             {
               "month": 6,
-              "realisasi": 55
+              "realisasi": 390,
+              "target": 430
             },
             {
               "month": 7,
-              "realisasi": 63
+              "realisasi": 480,
+              "target": 530
             },
             {
               "month": 8,
-              "realisasi": 72
+              "realisasi": 580,
+              "target": 630
             },
             {
               "month": 9,
-              "realisasi": 80
+              "realisasi": 690,
+              "target": 730
             },
             {
               "month": 10,
-              "realisasi": 88
+              "realisasi": 780,
+              "target": 810
             },
             {
               "month": 11,
-              "realisasi": 95
+              "realisasi": 860,
+              "target": 880
             },
             {
               "month": 12,
-              "realisasi": 100
+              "realisasi": 940,
+              "target": 940
             }
           ]
         },
@@ -747,51 +823,63 @@
           "monthly": [
             {
               "month": 1,
-              "realisasi": 0.8
+              "realisasi": 40,
+              "target": 50
             },
             {
               "month": 2,
-              "realisasi": 1.7
+              "realisasi": 95,
+              "target": 120
             },
             {
               "month": 3,
-              "realisasi": 2.6
+              "realisasi": 170,
+              "target": 200
             },
             {
               "month": 4,
-              "realisasi": 3.5
+              "realisasi": 260,
+              "target": 300
             },
             {
               "month": 5,
-              "realisasi": 4.5
+              "realisasi": 350,
+              "target": 400
             },
             {
               "month": 6,
-              "realisasi": 5.4
+              "realisasi": 470,
+              "target": 520
             },
             {
               "month": 7,
-              "realisasi": 6.3
+              "realisasi": 580,
+              "target": 640
             },
             {
               "month": 8,
-              "realisasi": 7.2
+              "realisasi": 690,
+              "target": 760
             },
             {
               "month": 9,
-              "realisasi": 8.0
+              "realisasi": 790,
+              "target": 850
             },
             {
               "month": 10,
-              "realisasi": 8.8
+              "realisasi": 880,
+              "target": 920
             },
             {
               "month": 11,
-              "realisasi": 9.5
+              "realisasi": 950,
+              "target": 970
             },
             {
               "month": 12,
-              "realisasi": 10.2
+              "realisasi": 1000,
+              "target": 1000
             }
           ]
         }

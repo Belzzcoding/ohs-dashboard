@@ -113,12 +113,7 @@ const Dashboard = (() => {
       trend = `<span class="kpi-trend"><i data-lucide="${icon}" aria-hidden="true"></i>${text} vs ${cfg.monthsShort[prev.month - 1]}</span>`;
     }
 
-    const meta = [
-      latest ? `Realisasi ${Scoring.valueText(def, latest.realisasi)}` : null,
-      `Target ${Scoring.targetText(def, true)}`,
-    ]
-      .filter(Boolean)
-      .join(" · ");
+    const meta = latest ? Scoring.summaryText(def, latest) : "";
 
     const ariaLabel = latest
       ? `Lihat detail indikator ${def.name}, skor ${formatNumber(latest.performance)} persen, status ${statusDef(latest.status).label}`
@@ -312,15 +307,12 @@ const Dashboard = (() => {
     const values = ind.monthly.map((m) => m.performance);
     const statuses = ind.monthly.map((m) => m.status);
     const showTarget = cfg.showTargetLine && ind.target !== null;
-    const realisasiText = ind.monthly.map((m) =>
-      m.realisasi === null ? null : Scoring.valueText(def, m.realisasi),
-    );
+    const realisasiText = ind.monthly.map((m) => (m.realisasi === null ? null : Scoring.actualText(def, m)));
 
     // Sumbu Y tidak mulai dari 0 agar variasi terlihat; ini dicatat di bawah chart.
-    const nums = values
-      .filter((v) => v !== null)
-      .concat(showTarget ? [ind.target] : []);
-    const yMin = Math.max(0, Math.floor((Math.min(...nums) - 5) / 10) * 10);
+    const nums = values.filter((v) => v !== null).concat(showTarget ? [ind.target] : []);
+    const lowest = Math.min(...nums);
+    const yMin = lowest < 0 ? Math.floor(lowest / 10) * 10 : Math.max(0, Math.floor((lowest - 5) / 10) * 10);
 
     const datasets = [
       {
@@ -419,7 +411,7 @@ const Dashboard = (() => {
         (m) => `
       <tr>
         <th scope="row">${cfg.monthsLong[m.month - 1]}</th>
-        <td>${m.realisasi === null ? "Belum ada data" : esc(Scoring.valueText(def, m.realisasi))}</td>
+        <td>${m.realisasi === null ? "Belum ada data" : esc(Scoring.actualText(def, m))}</td>
         <td>${m.performance === null ? "-" : formatNumber(m.performance) + "%"}</td>
         <td>${m.status ? esc(statusDef(m.status).label) : "-"}</td>
       </tr>`,
@@ -446,7 +438,7 @@ const Dashboard = (() => {
         ? "Januari"
         : `Januari–${cfg.monthsLong[latest.month - 1]}`;
     return esc(
-      `Kumulatif ${when} ${state.year}. ${Scoring.explain(def, latest.realisasi)}`,
+      `Kumulatif ${when} ${state.year}. ${Scoring.explain(def, latest.realisasi, latest.target)}`,
     );
   }
 
@@ -459,14 +451,13 @@ const Dashboard = (() => {
       : "line";
     const typeName = { line: "garis", bar: "batang", doughnut: "donat" }[type];
     // Ada aturan yang masih asumsi sementara (menunggu konfirmasi unit OHS)?
-    const assumed =
-      def.assumed || (def.rule.type === "rate" && cfg.scoring.capScore);
+    const assumed = def.assumed
 
     const headline = `
       <div class="kpi-headline">
         <div class="kpi-big">${latest ? formatNumber(latest.performance) + unit : "&ndash;"}</div>
         <div>${badge(latest ? latest.status : null)}</div>
-        <div class="kpi-target">${latest ? "Realisasi " + esc(Scoring.valueText(def, latest.realisasi)) + " · " : ""}Target ${esc(Scoring.targetText(def, true))}</div>
+        <div class="kpi-target">${latest ? esc(Scoring.summaryText(def, latest)) : "Target " + esc(Scoring.targetText(def))}</div>
       </div>`;
 
     const note = {
@@ -493,13 +484,18 @@ const Dashboard = (() => {
         <dl class="kpi-notes">
           <dt>Rumus</dt>
           <dd>${textOrEmpty(def.formulaText)}</dd>
-          <dt>Batas Tercapai</dt><dd>${esc(Scoring.targetText(def))}</dd>
+          <dt>Batas Tercapai</dt><dd>${esc(Scoring.targetText(def, latest ? latest.target : null))}</dd>
           <dt>Bobot skor total</dt><dd>${def.weight}%</dd>
           <dt>Sumber aturan</dt><dd>${esc(cfg.scoring.sourceNote)}</dd>
         </dl>
         ${
           assumed
-            ? '<div class="kpi-notice" role="note"><i data-lucide="triangle-alert" aria-hidden="true"></i><span>Sebagian aturan indikator ini masih asumsi sementara menunggu konfirmasi unit OHS (lihat <code>assumed</code> dan <code>scoring.capScore</code> di <code>config.js</code>).</span></div>'
+            ? '<div class="kpi-notice" role="note"><i data-lucide="triangle-alert" aria-hidden="true"></i><span>' +
+              esc(
+                def.assumedNote ||
+                  "Sebagian aturan indikator ini masih asumsi sementara menunggu konfirmasi unit OHS.",
+              ) +
+              "</span></div>"
             : ""
         }
         ${state.model.meta.isMockData ? '<p class="kpi-mock">Ini data contoh: angka dan status hanya placeholder pengembangan.</p>' : ""}
@@ -515,7 +511,7 @@ const Dashboard = (() => {
             (m) => `
           <tr${latest && m.month === latest.month ? ' class="is-latest"' : ""}>
             <th scope="row">${cfg.monthsLong[m.month - 1]}</th>
-            <td>${m.realisasi === null ? '<span class="kpi-muted">Belum ada data</span>' : esc(Scoring.valueText(def, m.realisasi))}</td>
+            <td>${m.realisasi === null ? '<span class="kpi-muted">Belum ada data</span>' : esc(Scoring.actualText(def, m))}</td>
             <td>${m.performance === null ? "&ndash;" : formatNumber(m.performance) + "%"}</td>
             <td>${m.performance === null ? "&ndash;" : badge(m.status)}</td>
           </tr>`,
@@ -608,10 +604,11 @@ const Dashboard = (() => {
       .filter((v) => v !== null)
       .concat(target !== null ? [target] : []);
     // Batang harus mulai dari 0; garis boleh dipotong agar variasi terlihat.
+    const lowest = Math.min(...nums);
     const yMin =
       type === "bar"
-        ? 0
-        : Math.max(0, Math.floor((Math.min(...nums) - 5) / 10) * 10);
+        ? Math.min(0, Math.floor(lowest / 10) * 10)
+        : lowest < 0 ? Math.floor(lowest / 10) * 10 : Math.max(0, Math.floor((lowest - 5) / 10) * 10);
 
     const main =
       type === "bar"
@@ -697,7 +694,7 @@ const Dashboard = (() => {
                 if (item.datasetIndex !== 0)
                   return `${item.dataset.label}: skor ${formatNumber(item.raw)}%`;
                 const m = ind.monthly[item.dataIndex];
-                return `Skor: ${formatNumber(item.raw)}% · Realisasi ${Scoring.valueText(def, m.realisasi)} (${statusDef(m.status).label})`;
+                return `Skor: ${formatNumber(item.raw)}% · Realisasi ${Scoring.actualText(def, m)} (${statusDef(m.status).label})`;
               },
             },
           },

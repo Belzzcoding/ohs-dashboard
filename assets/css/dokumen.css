@@ -37,13 +37,7 @@
 
 .doc-search .form-control { padding-left: 36px; }
 
-.tool-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.tool-group .tool-select { min-width: 200px; max-width: none; }
+.doc-toolbar .tool-select { min-width: 200px; max-width: none; }
 
 .doc-status { margin: 8px 0 16px; }
 
@@ -51,17 +45,4 @@
   .doc-search { flex-basis: 100%; max-width: none; }
   .doc-toolbar .tool-group { flex: 1 1 100%; }
   .doc-toolbar .tool-group .tool-select { flex: 1 1 auto; min-width: 0; }
-}
-
-/* ---------- Sidebar dapat dilipat di desktop (>= 1200px) ---------- */
-@media (min-width: 1200px) {
-  .sidebar { transition: transform 0.2s ease, visibility 0s; }
-  .app-main { transition: margin-left 0.2s ease; }
-
-  .sidebar-collapsed .sidebar {
-    transform: translateX(-100%) !important;
-    visibility: hidden !important;
-    transition: transform 0.2s ease, visibility 0s linear 0.2s;
-  }
-  .sidebar-collapsed .app-main { margin-left: 0;}
 }

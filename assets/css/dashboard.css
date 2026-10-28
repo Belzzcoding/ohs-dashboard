@@ -4,110 +4,6 @@
    Bergantung pada style.css (variabel, layout dasar, header).
    ========================================================== */
 
-/* ---------- Banner data contoh ---------- */
-.mock-banner {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 16px;
-  padding: 8px 16px;
-  background: var(--blue-light);
-  border: 1px solid #BFDBFE;
-  border-radius: var(--radius-sm);
-  color: #1E3A8A;
-  font-size: 0.8125rem;
-}
-.mock-banner[hidden] { display: none; }
-.mock-banner svg { width: 16px; height: 16px; flex: 0 0 16px; margin-top: 2px; }
-
-.kpi-hint-inline { color: var(--muted); }
-
-/* ==========================================================
-   KARTU KPI
-   ========================================================== */
-.kpi-card {
-  position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 16px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  min-width: 0;
-  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-}
-.kpi-card:hover {
-  transform: translateY(-2px);
-  border-color: #CBD5E1;
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
-}
-.kpi-card:focus-within {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
-}
-.kpi-card-btn {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  border-radius: inherit;
-  cursor: pointer;
-  color: transparent;
-  font-size: 0;
-}
-.kpi-card-btn:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
-.kpi-top { display: flex; align-items: center; gap: 12px; min-width: 0; }
-.kpi-icon {
-  flex: 0 0 36px;
-  width: 36px;
-  height: 36px;
-  display: grid;
-  place-items: center;
-  border-radius: 8px;
-  background: var(--blue-light);
-  color: var(--blue);
-}
-.kpi-icon svg { width: 18px; height: 18px; }
-.kpi-names { min-width: 0; }
-.kpi-name { font-size: 0.9375rem; font-weight: 600; line-height: 1.25; overflow-wrap: anywhere; }
-.kpi-full { font-size: 0.75rem; color: var(--text-2); line-height: 1.3; overflow-wrap: anywhere; }
-
-.kpi-value {
-  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.125rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  font-variant-numeric: tabular-nums;
-}
-.kpi-value .unit { font-size: 0.55em; font-weight: 600; color: var(--text-2); margin-left: 2px; }
-
-.kpi-bottom { margin-top: auto; display: grid; gap: 8px; }
-.kpi-trend { display: inline-flex; align-items: center; gap: 4px; }
-.kpi-trend svg { width: 14px; height: 14px; }
-
-.kpi-foot {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px 12px;
-  font-size: 0.75rem;
-  color: var(--text-2);
-}
-.kpi-detail-note {
-  margin: -6px 0 16px;
-  font-size: 0.75rem;
-  color: var(--text-2);
-  font-style: italic;
-}
 .kpi-hint {
   margin-top: 8px; padding-top: 8px;
   border-top: 1px dashed var(--border);
@@ -115,60 +11,6 @@
   display: flex; align-items: center; gap: 4px;
 }
 .kpi-hint svg { width: 12px; height: 12px; }
-
-/* ---------- Badge status ---------- */
-.badge-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.5;
-  white-space: nowrap;
-}
-.badge-status::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: currentColor;
-}
-.status-good     { background: #DCFCE7; color: #166534; }
-.status-good::before     { background: var(--good); }
-.status-warning  { background: #FEF3C7; color: #92400E; }
-.status-warning::before  { background: var(--warning); }
-.status-critical { background: #FEE2E2; color: #991B1B; }
-.status-critical::before { background: var(--critical); }
-.status-none     { background: var(--bg-2); color: #475569; }
-.status-none::before     { background: var(--muted); }
-
-/* ==========================================================
-   CHART
-   ========================================================== */
-.chart-controls { display: flex; flex-wrap: wrap; gap: 8px 16px; }
-.chart-wrap { position: relative; width: 100%; height: 380px; }
-.chart-wrap canvas { max-width: 100%; }
-.chart-empty {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 16px;
-  text-align: center;
-  color: var(--text-2);
-  background: var(--card);
-}
-.chart-empty[hidden] { display: none; }
-.chart-note { margin: 8px 0 0; font-size: 0.75rem; color: var(--text-2); }
-
-@media (max-width: 767.98px) { .chart-wrap { height: 300px; } }
-@media (max-width: 575.98px) {
-  .chart-wrap { height: 260px; }
-  .chart-controls { width: 100%; flex-direction: column; }
-  .chart-controls .tool-group { flex-direction: column; align-items: stretch; gap: 4px; }
-}
 
 /* ==========================================================
    RINGKASAN STATUS (base, sebelum layout v1.6)
@@ -192,71 +34,33 @@
 }
 
 /* ==========================================================
-   MODAL — DETAIL KPI
+    MODAL — DETAIL KPI
    ========================================================== */
-#kpiDetailModal .modal-content {
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-#kpiDetailModal .modal-header {
-  align-items: flex-start;
-  gap: 12px;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-}
-#kpiDetailModal .modal-title { font-size: 1.125rem; font-weight: 600; line-height: 1.3; }
-.modal-head-text { min-width: 0; }
-.modal-sub { margin: 4px 0 0; font-size: 0.8125rem; color: var(--text-2); }
-#kpiDetailModal .modal-body { padding: 20px; }
 
-.kpi-detail-head {
-  display: flex; align-items: center; gap: 12px;
-  flex-wrap: wrap; margin-bottom: 16px;
-}
-.kpi-detail-head .kpi-value {
-  font-size: clamp(2rem, 1.6rem + 1.4vw, 2.5rem);
-  line-height: 1;
-}
-.kpi-detail-target {
-  font-size: 0.875rem; color: var(--text-2);
-  margin-left: auto;
-}
-.kpi-detail-chart-wrap {
-  position: relative; width: 100%; height: 320px;
-  background: var(--card);
-}
-.kpi-detail-chart-wrap canvas { max-width: 100%; }
+.kpi-headline { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.kpi-big { font-size: 2.5rem; font-weight: 700; line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
+.kpi-big .unit { font-size: 0.5em; font-weight: 600; color: var(--text-2); }
+.kpi-target { font-size: 0.875rem; color: var(--text-2); margin-left: auto; background: var(--bg-2); padding: 4px 12px; border-radius: 999px; }
 
-.kpi-detail-explanation {
-  margin-top: 20px; padding: 16px;
-  background: var(--bg-2); border-radius: var(--radius-sm);
-}
-.kpi-detail-explain-title {
-  margin: 0 0 6px; font-size: 0.9375rem; font-weight: 600; color: var(--text);
-}
-.kpi-detail-explain-text {
-  margin: 0 0 16px; font-size: 0.875rem; color: var(--text-2); line-height: 1.55;
-}
-.kpi-detail-dl {
-  display: grid; grid-template-columns: max-content 1fr;
-  gap: 6px 16px; margin: 0; font-size: 0.8125rem;
-}
-.kpi-detail-dl dt { color: var(--text-2); font-weight: 500; margin: 0; }
-.kpi-detail-dl dd { margin: 0; color: var(--text); overflow-wrap: anywhere; }
-.kpi-detail-todo {
-  display: flex; align-items: flex-start; gap: 8px;
-  margin: 16px 0 0; padding: 10px 12px;
-  background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 8px;
-  font-size: 0.75rem; color: #92400E;
-}
-.kpi-detail-todo[hidden] { display: none; }
-.kpi-detail-todo svg { width: 14px; height: 14px; flex: 0 0 14px; margin-top: 2px; }
+.kpi-sec-title { font-size: 1rem; font-weight: 600; margin: 24px 0 12px; color: var(--navy); }
+.kpi-chart-wrap { position: relative; width: 100%; height: 320px; }
+@media (max-width: 767.98px) { .kpi-chart-wrap { height: 260px; } .kpi-target { margin-left: 0; flex-basis: 100%; margin-top: 8px; background: none; padding: 0; } }
 
-@media (max-width: 767.98px) {
-  .kpi-detail-chart-wrap { height: 260px; }
-  .kpi-detail-target { margin-left: 0; flex-basis: 100%; }
-}
+.kpi-why { background: var(--bg); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border); }
+.kpi-explain { font-size: 0.9375rem; line-height: 1.6; color: var(--text); margin-bottom: 16px; }
+.kpi-notes { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; margin: 0 0 16px; font-size: 0.875rem; }
+.kpi-notes dt { color: var(--text-2); font-weight: 500; }
+.kpi-notes dd { margin: 0; color: var(--text); font-weight: 500; }
+.kpi-note-empty { color: var(--muted); font-style: italic; font-weight: 400; }
+.kpi-notice { display: flex; align-items: flex-start; gap: 8px; background: #FFFBEB; border: 1px solid #FDE68A; color: #92400E; padding: 12px; border-radius: 8px; font-size: 0.8125rem; margin-top: 16px; }
+.kpi-notice svg { flex: 0 0 16px; width: 16px; height: 16px; margin-top: 2px; }
+.kpi-mock { font-size: 0.75rem; color: var(--text-2); font-style: italic; margin-top: 12px; }
+
+.kpi-table th, .kpi-table td { vertical-align: middle; font-size: 0.875rem; font-variant-numeric: tabular-nums; }
+.kpi-table th:not(:first-child), .kpi-table td { text-align: right; }
+.kpi-table tbody th { font-weight: 500; }
+.kpi-table tr.is-latest { background-color: var(--blue-light); font-weight: 600; }
+.kpi-muted { color: var(--muted); font-style: italic; }
 
 /* ==========================================================
    LAYOUT v1.6 — Jam WITA, kolom kanan, Safety Alert, Jadwal

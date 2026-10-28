@@ -189,53 +189,18 @@
     </div>
 
     <!-- ============ MODAL: KPI DETAIL ============ -->
-    <div class="modal fade" id="kpiDetailModal" tabindex="-1" aria-labelledby="kpiDetailTitle" aria-hidden="true">
+    <div class="modal fade kpi-modal" id="kpiModal" tabindex="-1" aria-labelledby="kpiDetailTitle" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
         <div class="modal-content">
           <div class="modal-header">
-            <div class="modal-head-text">
-              <h2 class="modal-title h5" id="kpiDetailTitle">—</h2>
-              <p class="modal-sub" id="kpiDetailPeriod">—</p>
+            <div>
+              <h2 class="modal-title" id="kpiDetailTitle"></h2>
+              <p class="kpi-modal-sub" id="kpiModalSub"></p>
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup detail indikator"></button>
           </div>
-
-          <div class="modal-body">
-            <div class="kpi-detail-head">
-              <span class="kpi-value" id="kpiDetailValue">—</span>
-              <span class="badge-status status-none" id="kpiDetailStatus">—</span>
-              <span class="kpi-detail-target" id="kpiDetailTarget">—</span>
-            </div>
-
-            <div class="kpi-detail-chart-wrap">
-              <canvas id="kpiDetailChart" role="img" aria-label="Grafik detail indikator"></canvas>
-              <div class="chart-empty" id="kpiDetailChartEmpty" hidden>Belum ada data untuk periode ini.</div>
-            </div>
-            <p class="chart-note" id="kpiDetailChartNote"></p>
-
-            <div class="kpi-detail-explanation">
-              <h3 class="kpi-detail-explain-title">Mengapa nilainya demikian?</h3>
-              <p class="kpi-detail-explain-text" id="kpiDetailExplanation">—</p>
-              <p class="kpi-detail-note">
-                Status <strong>Good</strong> / <strong>Warning</strong> / <strong>Critical</strong>
-                dibaca langsung dari data yang dikelola unit OHS, tidak dihitung oleh dashboard.
-              </p>
-              <dl class="kpi-detail-dl">
-                <dt>Rumus</dt>
-                <dd id="kpiDetailFormula">—</dd>
-                <dt>Ambang Good</dt>
-                <dd id="kpiDetailGood">—</dd>
-                <dt>Ambang Warning</dt>
-                <dd id="kpiDetailWarning">—</dd>
-                <dt>Ambang Critical</dt>
-                <dd id="kpiDetailCritical">—</dd>
-              </dl>
-              
-              <p class="kpi-detail-todo" id="kpiDetailTodo" hidden>
-                <i data-lucide="info" aria-hidden="true"></i>
-                <span>Formula &amp; ambang batas di atas masih <strong>placeholder</strong>. Menunggu penetapan resmi dari unit OHS.</span>
-              </p>
-            </div>
+          <div class="modal-body" id="kpiModalBody" tabindex="0" role="region" aria-labelledby="kpiDetailTitle">
+            <!-- Isi modal akan di-generate oleh dashboard.js -->
           </div>
         </div>
       </div>
