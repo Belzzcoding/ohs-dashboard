@@ -2,17 +2,12 @@
   Kosongkan ("") bila belum ada. Kartu / menu dengan link kosong atau tidak valid otomatis dinonaktifkan (tidak ada link rusak).
   Hanya URL berawalan https:// yang diterima.*/
 const ohsLinks = {
-  safety: "",
-  occupationalHealth: "",
-  environment: "",
-  inspection: "",
-  training: "",
-  emergency: "",
-  reports: "",
-  // Tambahan khusus kartu Quick Access
-  forms: "",
-  medical: "",
-  development: ""
+  sertif:
+    "https://www.google.com/url?q=https%3A%2F%2Fsemenindonesia.sharepoint.com%2F%3Af%3A%2Fr%2Fsites%2FOHS974%2FShared%2520Documents%2FFolder%2520OHS%2FSLO%2520SIO%2FSertifikasi%2520Personil%3Fd%3Dw2156c67a92144cf691992b21addaee3e%26csf%3D1%26web%3D1%26e%3DODS4LJ&sa=D&sntz=1&usg=AOvVaw1e831kGVsiWIxFYhfJcAZz",
+  p2k3: "https://www.google.com/url?q=https%3A%2F%2Fsemenindonesia.sharepoint.com%2F%3Af%3A%2Fr%2Fsites%2FOHS974%2FShared%2520Documents%2FFolder%2520OHS%2FP2K3%2FRapat%2520P2K3%3Fd%3Dw370800a11c7943cdb2a41864439c4e7e%26csf%3D1%26web%3D1%26e%3D3WRWDh&sa=D&sntz=1&usg=AOvVaw3lhOenNKoTkIN77HqRZsih",
+  csms: "https://www.google.com/url?q=https%3A%2F%2Fsemenindonesia.sharepoint.com%2F%3Af%3A%2Fr%2Fsites%2FOHS974%2FShared%2520Documents%2FFolder%2520OHS%2FCSMS%3Fd%3Dw5bf9cf38bec54ddab55da51e8d5126e8%26csf%3D1%26web%3D1%26e%3D1f2CQ1&sa=D&sntz=1&usg=AOvVaw1B5yqv_NoI5ya9aDJ_sYfd",
+  slo: "https://www.google.com/url?q=https%3A%2F%2Fsemenindonesia.sharepoint.com%2F%3Af%3A%2Fr%2Fsites%2FOHS974%2FShared%2520Documents%2FFolder%2520OHS%2FSLO%2520SIO%2FSLO%3Fd%3Dw2ab53e9d40da4f47b4d17dc671490673%26csf%3D1%26web%3D1%26e%3DbReFtn&sa=D&sntz=1&usg=AOvVaw3lFxjhsLUoq1JxLW-vYTGl",
+  opex: "https://www.google.com/url?q=https%3A%2F%2Fsemenindonesia.sharepoint.com%2F%3Af%3A%2Fr%2Fsites%2FOHS974%2FShared%2520Documents%2FFolder%2520OHS%2FOPEX%2520%2526%2520CAPEX%3Fd%3Dwde755dfb831244d5bcc3c79b0faf9917%26csf%3D1%26web%3D1%26e%3DTYKiaY&sa=D&sntz=1&usg=AOvVaw1lK_bpyUjMqYEAtWkYeQhk",
 };
 
 /* ---------- 2a. Sumber data ----------
@@ -444,7 +439,7 @@ const ohsConfig = {
           title: "OPEX & CAPEX",
           desc: "OPEX & CAPEX Unit OHS",
           icon: "hand-coins",
-          url: "https://www.google.com/url?q=https%3A%2F%2Fsemenindonesia.sharepoint.com%2F%3Af%3A%2Fr%2Fsites%2FOHS974%2FShared%2520Documents%2FFolder%2520OHS%2FOPEX%2520%2526%2520CAPEX%3Fd%3Dwde755dfb831244d5bcc3c79b0faf9917%26csf%3D1%26web%3D1%26e%3DTYKiaY&sa=D&sntz=1&usg=AOvVaw1lK_bpyUjMqYEAtWkYeQhk",
+          linkKey: "opex",
         },
         {
           title: "KPI",
@@ -468,7 +463,7 @@ const ohsConfig = {
           title: "P2K3",
           desc: "Panitia Pembina Keselamatan dan Kesehatan Kerja",
           icon: "person-standing",
-          url: "https://www.google.com/url?q=https%3A%2F%2Fsemenindonesia.sharepoint.com%2F%3Af%3A%2Fr%2Fsites%2FOHS974%2FShared%2520Documents%2FFolder%2520OHS%2FP2K3%2FRapat%2520P2K3%3Fd%3Dw370800a11c7943cdb2a41864439c4e7e%26csf%3D1%26web%3D1%26e%3D3WRWDh&sa=D&sntz=1&usg=AOvVaw3lhOenNKoTkIN77HqRZsih",
+          linkKey: "p2k3",
         },
       ],
     },
@@ -507,8 +502,8 @@ const ohsConfig = {
         {
           title: "Sertifikasi Personil",
           desc: "Sertifikasi personil",
-          icon: "ticket-check",
-          url: "https://www.google.com/url?q=https%3A%2F%2Fsemenindonesia.sharepoint.com%2F%3Af%3A%2Fr%2Fsites%2FOHS974%2FShared%2520Documents%2FFolder%2520OHS%2FSLO%2520SIO%2FSertifikasi%2520Personil%3Fd%3Dw2156c67a92144cf691992b21addaee3e%26csf%3D1%26web%3D1%26e%3DODS4LJ&sa=D&sntz=1&usg=AOvVaw1e831kGVsiWIxFYhfJcAZz",
+          icon: "certificate",
+          linkKey: "sertif",
         },
         {
           title: "Monitoring APD",
@@ -520,7 +515,7 @@ const ohsConfig = {
           title: "SLO",
           desc: "Sertifikat Laik Operasi",
           icon: "file-text",
-          url: "https://www.google.com/url?q=https%3A%2F%2Fsemenindonesia.sharepoint.com%2F%3Af%3A%2Fr%2Fsites%2FOHS974%2FShared%2520Documents%2FFolder%2520OHS%2FSLO%2520SIO%2FSLO%3Fd%3Dw2ab53e9d40da4f47b4d17dc671490673%26csf%3D1%26web%3D1%26e%3DbReFtn&sa=D&sntz=1&usg=AOvVaw3lFxjhsLUoq1JxLW-vYTGl",
+          linkKey: "slo",
         },
       ],
     },
@@ -537,7 +532,7 @@ const ohsConfig = {
           title: "CSMS",
           desc: "Contractor Safety Management System",
           icon: "hard-hat",
-          url: "https://www.google.com/url?q=https%3A%2F%2Fsemenindonesia.sharepoint.com%2F%3Af%3A%2Fr%2Fsites%2FOHS974%2FShared%2520Documents%2FFolder%2520OHS%2FCSMS%3Fd%3Dw5bf9cf38bec54ddab55da51e8d5126e8%26csf%3D1%26web%3D1%26e%3D1f2CQ1&sa=D&sntz=1&usg=AOvVaw1B5yqv_NoI5ya9aDJ_sYfd",
+          linkKey: "csms",
         },
       ],
     },
@@ -569,52 +564,34 @@ const ohsConfig = {
   /* Kartu Quick Access */
   quickAccess: [
     {
-      title: "Safety",
-      desc: "Dokumen dan prosedur keselamatan",
-      icon: "folder-open",
-      linkKey: "safety",
+      title: "Sertifikasi",
+      desc: "Sertifikasi personil",
+      icon: "certificate",
+      linkKey: "sertif",
     },
     {
-      title: "OHS Forms",
-      desc: "Formulir pelaporan dan pengisian",
-      icon: "clipboard-list",
-      linkKey: "forms",
+      title: "P2K3",
+      desc: "Panitia P2K3",
+      icon: "user-group",
+      linkKey: "p2k3",
     },
     {
-      title: "Inspection Records",
-      desc: "Catatan inspeksi area kerja",
-      icon: "clipboard-check",
-      linkKey: "inspection",
+      title: "CSMS",
+      desc: "Manajemen Kontraktor",
+      icon: "hard-hat",
+      linkKey: "csms",
     },
     {
-      title: "Training Materials",
-      desc: "Materi pelatihan K3",
+      title: "SLO",
+      desc: "SLO Unit OHS",
       icon: "book-open",
-      linkKey: "training",
+      linkKey: "slo",
     },
     {
-      title: "OHS Reports",
-      desc: "Laporan kinerja OHS",
-      icon: "file-text",
-      linkKey: "reports",
-    },
-    {
-      title: "Emergency Procedures",
-      desc: "Prosedur tanggap darurat",
-      icon: "siren",
-      linkKey: "emergency",
-    },
-    {
-      title: "Medical / MCU Resources",
-      desc: "Informasi layanan kesehatan kerja",
-      icon: "stethoscope",
-      linkKey: "medical",
-    },
-    {
-      title: "SHE Development",
-      desc: "Pengembangan diri SHE",
-      icon: "graduation-cap",
-      linkKey: "development",
+      title: "Opex & Capex",
+      desc: "Opex & Capex Unit OHS",
+      icon: "wallet",
+      linkKey: "opex",
     },
   ],
 };

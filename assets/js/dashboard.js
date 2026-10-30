@@ -166,7 +166,7 @@ const Dashboard = (() => {
       }),
     );
     $("periodLabel").textContent = lastMonth
-      ? `${state.year} · kumulatif ${lastMonth === 1 ? "" : "Januari–"}${cfg.monthsLong[lastMonth - 1]}`
+      ? `${state.year} · ${lastMonth === 1 ? "" : "Januari – "}${cfg.monthsLong[lastMonth - 1]}`
       : String(state.year);
   }
 
