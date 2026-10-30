@@ -114,6 +114,10 @@ const Dashboard = (() => {
     }
 
     const meta = latest ? Scoring.summaryText(def, latest) : "";
+    const ytdLine =
+      latest && cfg.scoring.showYtd && latest.ytd
+        ? `<div class="kpi-foot kpi-ytd">${esc(Scoring.ytdText(def, latest.ytd))}</div>`
+        : "";
 
     const ariaLabel = latest
       ? `Lihat detail indikator ${def.name}, skor ${formatNumber(latest.performance)} persen, status ${statusDef(latest.status).label}`
@@ -138,6 +142,7 @@ const Dashboard = (() => {
           <div class="kpi-bottom">
             <div class="kpi-foot">${badge(latest ? latest.status : null)}${trend}</div>
             <div class="kpi-foot">${esc(meta)}</div>
+            ${ytdLine}
             <div class="kpi-foot"><button type="button" class="kpi-more stretched-link" data-indicator-id="${esc(def.id)}" aria-haspopup="dialog" aria-label="${esc(ariaLabel)}">Lihat detail<i data-lucide="chevron-right" aria-hidden="true"></i></button></div>
           </div>
         </article>
@@ -166,7 +171,7 @@ const Dashboard = (() => {
       }),
     );
     $("periodLabel").textContent = lastMonth
-      ? `${state.year} · ${lastMonth === 1 ? "" : "Januari – "}${cfg.monthsLong[lastMonth - 1]}`
+      ? `${state.year} · data s.d. ${cfg.monthsLong[lastMonth - 1]}`
       : String(state.year);
   }
 
@@ -177,6 +182,7 @@ const Dashboard = (() => {
     const box = $("totalCard");
     const y = yearData();
     const totals = y ? Scoring.totalByMonth(y.indicators) : [];
+    const totalsYtd = y ? Scoring.totalByMonth(y.indicators, "ytd") : [];
     const done = totals.filter((t) => t.total !== null);
     if (!done.length) {
       box.innerHTML = `
@@ -188,14 +194,24 @@ const Dashboard = (() => {
       return;
     }
     const cur = done[done.length - 1];
-    const prev = done.length > 1 ? done[done.length - 2] : null;
-    const status = cur.passed ? "met" : "notMet";
     const monthName = cfg.monthsLong[cur.month - 1];
+    const ytdCur = totalsYtd[cur.month - 1];
+    const useYtd = cfg.scoring.showYtd && ytdCur && ytdCur.total !== null;
+    const main = useYtd ? ytdCur : cur;
+    const prev = useYtd
+      ? cur.month > 1
+        ? totalsYtd[cur.month - 2]
+        : null
+      : done.length > 1
+        ? done[done.length - 2]
+        : null;
+    const hasPrev = prev && prev.total !== null;
+    const status = main.passed ? "met" : "notMet";
     const when = cur.month === 1 ? monthName : `Januari–${monthName}`;
 
     let trend = "";
-    if (prev) {
-      const delta = Math.round((cur.total - prev.total) * 10) / 10;
+    if (hasPrev) {
+      const delta = Math.round((main.total - prev.total) * 10) / 10;
       const icon =
         delta > 0 ? "arrow-up-right" : delta < 0 ? "arrow-down-right" : "minus";
       const text =
@@ -205,15 +221,25 @@ const Dashboard = (() => {
       trend = `<span class="kpi-trend"><i data-lucide="${icon}" aria-hidden="true"></i>${text} vs ${cfg.monthsShort[prev.month - 1]}</span>`;
     }
 
+    const basis = useYtd
+      ? `Target ≥ ${cfg.scoring.totalTarget}% · YTD ${esc(when)} ${state.year}`
+      : cfg.scoring.showYtd
+        ? `Target ≥ ${cfg.scoring.totalTarget}% · skor bulan ${esc(monthName)} ${state.year} (YTD belum lengkap)`
+        : `Target ≥ ${cfg.scoring.totalTarget}% · skor bulan ${esc(monthName)} ${state.year}`;
+    const monthLine = useYtd
+      ? `<p class="total-sub">Skor bulan ${esc(monthName)}: ${formatNumber(cur.total)}%</p>`
+      : "";
+
     const rows = cfg.indicators
       .map((def) => {
         const entry = getIndicator(def.id).monthly[cur.month - 1];
-        const points = (def.weight / 100) * entry.performance;
+        const score = useYtd ? entry.ytd.performance : entry.performance;
+        const points = (def.weight / 100) * score;
         return `
         <tr>
           <th scope="row">${esc(def.name)}</th>
           <td>${def.weight}%</td>
-          <td>${formatNumber(entry.performance)}%</td>
+          <td>${formatNumber(score)}%</td>
           <td>${formatNumber(points)}</td>
         </tr>`;
       })
@@ -222,19 +248,19 @@ const Dashboard = (() => {
     box.innerHTML = `
       <div class="total-main">
         <div class="total-label">${esc(cfg.scoring.totalLabel)}</div>
-        <div class="total-value">${formatNumber(cur.total)}<span class="unit">%</span></div>
+        <div class="total-value">${formatNumber(main.total)}<span class="unit">%</span></div>
         <div class="kpi-foot">${badge(status)}${trend}</div>
-        <p class="total-sub">Target ≥ ${cfg.scoring.totalTarget}% · kumulatif ${esc(when)} ${state.year}</p>
+        <p class="total-sub">${basis}</p>
+        ${monthLine}
       </div>
       <details class="total-detail">
         <summary>Lihat perhitungan skor total</summary>
         <table class="table table-sm total-table">
-          <caption class="visually-hidden">Kontribusi tiap indikator pada skor total ${esc(monthName)} ${state.year}</caption>
-          <thead><tr><th scope="col">Indikator</th><th scope="col">Bobot</th><th scope="col">Skor</th><th scope="col">Poin</th></tr></thead>
+          <caption class="visually-hidden">Kontribusi tiap indikator pada skor total ${useYtd ? "YTD " + esc(when) : esc(monthName)} ${state.year}</caption>
+          <thead><tr><th scope="col">Indikator</th><th scope="col">Bobot</th><th scope="col">Skor${useYtd ? " YTD" : ""}</th><th scope="col">Poin</th></tr></thead>
           <tbody>${rows}</tbody>
-          <tfoot><tr><th scope="row">Total</th><td>100%</td><td></td><td>${formatNumber(cur.total)}</td></tr></tfoot>
+          <tfoot><tr><th scope="row">Total</th><td>100%</td><td></td><td>${formatNumber(main.total)}</td></tr></tfoot>
         </table>
-        <p class="total-note">Poin = bobot × skor. Rumus dan bobot sesuai ${esc(cfg.scoring.sourceNote)}.</p>
       </details>`;
   }
 
@@ -247,7 +273,7 @@ const Dashboard = (() => {
       list.innerHTML = `<li>${EMPTY_TEXT}</li>`;
       return;
     }
-    sub.textContent = `Status kumulatif (YTD) bulan terbaru dari tiap indikator, ${state.year}.`;
+    sub.textContent = `Status bulan terbaru (bulan itu) dari tiap indikator, ${state.year}.`;
 
     const groups = { met: [], notMet: [], none: [] };
     cfg.indicators.forEach((def) => {
@@ -307,12 +333,19 @@ const Dashboard = (() => {
     const values = ind.monthly.map((m) => m.performance);
     const statuses = ind.monthly.map((m) => m.status);
     const showTarget = cfg.showTargetLine && ind.target !== null;
-    const realisasiText = ind.monthly.map((m) => (m.realisasi === null ? null : Scoring.actualText(def, m)));
+    const realisasiText = ind.monthly.map((m) =>
+      m.realisasi === null ? null : Scoring.actualText(def, m),
+    );
 
     // Sumbu Y tidak mulai dari 0 agar variasi terlihat; ini dicatat di bawah chart.
-    const nums = values.filter((v) => v !== null).concat(showTarget ? [ind.target] : []);
+    const nums = values
+      .filter((v) => v !== null)
+      .concat(showTarget ? [ind.target] : []);
     const lowest = Math.min(...nums);
-    const yMin = lowest < 0 ? Math.floor(lowest / 10) * 10 : Math.max(0, Math.floor((lowest - 5) / 10) * 10);
+    const yMin =
+      lowest < 0
+        ? Math.floor(lowest / 10) * 10
+        : Math.max(0, Math.floor((lowest - 5) / 10) * 10);
 
     const datasets = [
       {
@@ -399,7 +432,7 @@ const Dashboard = (() => {
       (showTarget
         ? `Garis putus-putus = batas Tercapai (skor ${formatNumber(ind.target)}%). `
         : "") +
-      "Titik: lingkaran = Tercapai, belah ketupat = Belum tercapai. Nilai kumulatif Januari s.d. bulan terkait (YTD). Sumbu Y tidak dimulai dari 0.";
+      "Titik: lingkaran = Tercapai, belah ketupat = Belum tercapai. Nilai per bulan (bukan kumulatif). Sumbu Y tidak dimulai dari 0.";
 
     // Alternatif teks untuk pembaca layar
     $("trendChart").setAttribute(
@@ -429,16 +462,16 @@ const Dashboard = (() => {
       ? esc(v)
       : '<span class="kpi-note-empty">Belum ditetapkan</span>';
 
-  /* Kalimat penjelas: hitungan dari Scoring.explain + keterangan bahwa angka bersifat kumulatif. */
+  /* Kalimat penjelas: hitungan bulan itu dari Scoring.explain, plus baris YTD bila ada. */
   function buildExplanation(def, latest) {
     if (!latest)
       return "Belum ada data untuk periode ini sehingga skor belum dapat dihitung.";
-    const when =
-      latest.month === 1
-        ? "Januari"
-        : `Januari–${cfg.monthsLong[latest.month - 1]}`;
+    const ytd =
+      cfg.scoring.showYtd && latest.ytd
+        ? ` ${Scoring.ytdText(def, latest.ytd)}.`
+        : "";
     return esc(
-      `Kumulatif ${when} ${state.year}. ${Scoring.explain(def, latest.realisasi, latest.target)}`,
+      `Bulan ${cfg.monthsLong[latest.month - 1]} ${state.year}. ${Scoring.explain(def, latest.realisasi, latest.target)}${ytd}`,
     );
   }
 
@@ -451,7 +484,7 @@ const Dashboard = (() => {
       : "line";
     const typeName = { line: "garis", bar: "batang", doughnut: "donat" }[type];
     // Ada aturan yang masih asumsi sementara (menunggu konfirmasi unit OHS)?
-    const assumed = def.assumed
+    const assumed = def.assumed;
 
     const headline = `
       <div class="kpi-headline">
@@ -461,8 +494,8 @@ const Dashboard = (() => {
       </div>`;
 
     const note = {
-      line: "Skor kumulatif (YTD). Titik: lingkaran = Tercapai, belah ketupat = Belum tercapai. Garis putus-putus = batas Tercapai. Sumbu Y tidak dimulai dari 0.",
-      bar: "Skor kumulatif (YTD). Warna batang mengikuti status (hijau Tercapai, merah Belum tercapai); teks status ada di tooltip dan tabel di bawah. Garis putus-putus = batas Tercapai.",
+      line: "Titik: lingkaran = Tercapai, belah ketupat = Belum tercapai. Garis putus-putus = batas Tercapai. Sumbu Y tidak dimulai dari 0.",
+      bar: "Hijau: Tercapai, Merah: Belum tercapai). Garis putus-putus = batas Tercapai.",
       doughnut:
         "Donat menunjukkan berapa bulan berstatus Tercapai dan Belum tercapai pada tahun ini (hanya bulan yang sudah ada datanya).",
     }[type];
@@ -504,7 +537,7 @@ const Dashboard = (() => {
     const table = `
       <h3 class="kpi-sec-title">Data per bulan ${state.year}</h3>
       <table class="table table-sm kpi-table">
-        <caption class="visually-hidden">Realisasi kumulatif, skor, dan status ${esc(def.name)} per bulan, tahun ${state.year}</caption>
+        <caption class="visually-hidden">Realisasi bulanan, skor, dan status ${esc(def.name)} per bulan, tahun ${state.year}</caption>
         <thead><tr><th scope="col">Bulan</th><th scope="col">Realisasi</th><th scope="col">Skor</th><th scope="col">Status</th></tr></thead>
         <tbody>${ind.monthly
           .map(
@@ -520,7 +553,7 @@ const Dashboard = (() => {
         </tbody>
       </table>`;
 
-    return headline + chartBox + why + table;
+    return headline + chartBox + table;
   }
 
   function destroyModalChart() {
@@ -608,7 +641,9 @@ const Dashboard = (() => {
     const yMin =
       type === "bar"
         ? Math.min(0, Math.floor(lowest / 10) * 10)
-        : lowest < 0 ? Math.floor(lowest / 10) * 10 : Math.max(0, Math.floor((lowest - 5) / 10) * 10);
+        : lowest < 0
+          ? Math.floor(lowest / 10) * 10
+          : Math.max(0, Math.floor((lowest - 5) / 10) * 10);
 
     const main =
       type === "bar"

@@ -19,6 +19,12 @@ const DataService = (() => {
     return Number.isFinite(n) ? n : null;
   }
 
+  /* Angka >= 0 atau null (negatif / kosong / bukan angka dianggap tidak ada). */
+  const nonNegative = (v) => {
+    const n = toNumber(v);
+    return n !== null && n >= 0 ? n : null;
+  };
+
   /* Pastikan tiap indikator punya tepat 12 bulan, lalu hitung skor + status. */
   function normalizeMonthly(rawMonthly, def) {
     const byMonth = {};
@@ -26,25 +32,42 @@ const DataService = (() => {
       const month = toNumber(m && m.month);
       if (month >= 1 && month <= 12) byMonth[month] = m;
     });
-    return Array.from({ length: 12 }, (_, i) => {
-      const m = byMonth[i + 1];
-      const value = m ? toNumber(m.realisasi) : null;
-      const realisasi = value !== null && value >= 0 ? value : null; // angka negatif dianggap tidak valid
-      const target = m ? toNumber(m.target) : null;
+    const months = Array.from({ length: 12 }, (_, i) => {
+      const m = byMonth[i + 1] || {};
+      const realisasi = nonNegative(m.realisasi);
+      const target = nonNegative(m.target);
       const result = Scoring.evaluate(def, realisasi, target);
       return {
         month: i + 1,
-        realisasi,
-        target: target !== null && target > 0 ? target : null,
+        realisasi, // tetap disimpan walau skor belum bisa dihitung (mis. target kosong)
+        target,
+        realisasiYtd: nonNegative(m.realisasi_ytd),
         performance: result ? result.score : null,
         status: result ? (result.passed ? "met" : "notMet") : null,
+        ytd: null,
       };
     });
+    months.forEach((entry, i) => {
+      const y = Scoring.evaluateYtd(def, months, i);
+      if (y)
+        entry.ytd = {
+          realisasi: y.realisasi,
+          target: y.target,
+          performance: y.score,
+          status: y.passed ? "met" : "notMet",
+        };
+    });
+    return months;
   }
 
   /* Validasi + rapikan model (dipakai oleh sumber lokal maupun Sheets). */
   function normalize(raw) {
-    if (!raw || typeof raw !== "object" || !raw.years || typeof raw.years !== "object") {
+    if (
+      !raw ||
+      typeof raw !== "object" ||
+      !raw.years ||
+      typeof raw.years !== "object"
+    ) {
       throw new Error(
         "Format data tidak dikenali: properti 'years' tidak ada.",
       );
@@ -54,7 +77,9 @@ const DataService = (() => {
       const list = (raw.years[year] && raw.years[year].indicators) || [];
       years[String(year)] = {
         indicators: list.map((ind) => {
-          const id = String(ind.id || "").trim().toLowerCase();
+          const id = String(ind.id || "")
+            .trim()
+            .toLowerCase();
           const def = ohsConfig.indicators.find((d) => d.id === id);
           return {
             id,
@@ -92,7 +117,7 @@ const DataService = (() => {
     let row = [];
     let cell = "";
     let inQuotes = false;
-    const src = String(text).replace(/^/, "");
+    const src = String(text).replace(/^﻿/, "");
     for (let i = 0; i < src.length; i++) {
       const ch = src[i];
       if (inQuotes) {
@@ -147,7 +172,12 @@ const DataService = (() => {
 
       const y = (years[year] = years[year] || { indicators: {} });
       const ind = (y.indicators[id] = y.indicators[id] || { id, monthly: [] });
-      ind.monthly.push({ month, realisasi: get("realisasi"), target: get("target") });
+      ind.monthly.push({
+        month,
+        realisasi: get("realisasi"),
+        target: get("target"),
+        realisasi_ytd: get("realisasi_ytd"),
+      });
 
       const lu = String(get("last_updated")).trim();
       if (/^\d{4}-\d{2}-\d{2}/.test(lu) && (!lastUpdated || lu > lastUpdated))

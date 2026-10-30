@@ -54,8 +54,11 @@ const ohsConfig = {
 
   /* Skor total resmi (Katalog KPI Generic 2026 - Safety Performance). */
   scoring: {
-    capScore: false, // true = skor tiap indikator dibatasi 0-100; false = boleh <0 atau >100
-    capProgressScore: true,
+    capRateScore: false,
+    capProgressScore: false,
+    showYtd: false, // true = tampilkan YTD di popup indikator; false = sembunyikan
+    ytdNote:
+      "YTD dihitung website dari data bulanan; rumus resmi YTD untuk indikator berbasis orang masih menunggu konfirmasi unit OHS.",
     totalTarget: 90,
     totalLabel: "Skor Safety Performance",
     sourceNote: "Katalog KPI Generic 2026 – Safety Performance",
@@ -179,13 +182,10 @@ const ohsConfig = {
       icon: "eye",
       chartType: "bar",
       weight: 20,
-      rule: { type: "progress", passRatio: 0.5, unit: "orang" },
+      rule: { type: "progress", unit: "orang" },
       formulaText:
-        "Jumlah orang yang melaksanakan SOT dibanding target bulan itu (offline atau online). Skor = Realisasi ÷ Target. Capaian minimal 50% dari target tetap berstatus Tercapai.",
+        "Jumlah karyawan yang menginput temuan SOT pada bulan itu (offline atau online; dihitung manual oleh unit OHS) dibanding target bulan itu. Skor = Realisasi ÷ Target. Skor boleh di atas 100%.",
       explanationTemplate: "",
-      assumed: true,
-      assumedNote:
-        'Arti "jumlah orang" untuk SOT dan batas Tercapai 50% perlu dikonfirmasi unit OHS; skor dibatasi 100% (asumsi sementara).',
     },
     {
       id: "mcu",
@@ -196,11 +196,8 @@ const ohsConfig = {
       weight: 10,
       rule: { type: "progress", unit: "orang" },
       formulaText:
-        "Jumlah karyawan yang telah melakukan MCU (kumulatif sejak Januari) dibanding target bulan itu. Skor = Realisasi ÷ Target. Tercapai bila jumlah orang terpenuhi.",
+        "Jumlah karyawan yang melakukan MCU pada bulan itu dibanding target bulan itu. Skor = Realisasi ÷ Target. Tercapai bila jumlah orang terpenuhi; skor boleh di atas 100%.",
       explanationTemplate: "",
-      assumed: true,
-      assumedNote:
-        "Skor dibatasi 100% bila realisasi melebihi target (asumsi sementara menunggu unit OHS).",
     },
     {
       id: "cam",
@@ -211,11 +208,8 @@ const ohsConfig = {
       weight: 10,
       rule: { type: "progress", unit: "orang" },
       formulaText:
-        "Jumlah karyawan yang telah konsultasi dengan dokter perusahaan setelah hasil MCU (kumulatif sejak Januari) dibanding target bulan itu. Skor = Realisasi ÷ Target.",
+        "Jumlah karyawan yang berkonsultasi dengan dokter perusahaan setelah hasil MCU pada bulan itu dibanding target bulan itu. Skor = Realisasi ÷ Target; boleh di atas 100%.",
       explanationTemplate: "",
-      assumed: true,
-      assumedNote:
-        "Skor dibatasi 100% bila realisasi melebihi target (asumsi sementara menunggu unit OHS).",
     },
     {
       id: "ssd",
@@ -226,11 +220,8 @@ const ohsConfig = {
       weight: 10,
       rule: { type: "progress", unit: "orang" },
       formulaText:
-        "Jumlah karyawan yang telah mencapai minimal 10 jam self learning health & safety (kumulatif sejak Januari) dibanding target bulan itu. Skor = Realisasi ÷ Target.",
+        "Jumlah karyawan yang mencapai minimal 10 jam self learning health & safety pada bulan itu dibanding target bulan itu. Skor = Realisasi ÷ Target; boleh di atas 100%.",
       explanationTemplate: "",
-      assumed: true,
-      assumedNote:
-        "Skor dibatasi 100% bila realisasi melebihi target (asumsi sementara menunggu unit OHS).",
     },
   ],
 
