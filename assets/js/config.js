@@ -18,7 +18,7 @@ const dataSource = {
   type: "sheets",
   localUrl: "assets/data/dashboard-data.json",
   sheetsCsvUrl:
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4hLSBN-nkOOZeSgNpld2cdVRqUsfsxi03tugmqHKjAkm3plM81wfgwHQwzLJIg171CPyhjRqrYNG/pub?output=csv",
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQEHRyCcbOaZjCkiyn5RVcKeXMm3s4fC2c4yBxHT5YZUhK5o7kGCSTBtHMXJwH86sx0gdx-BqFN12W/pub?gid=646783527&single=true&output=csv",
 };
 
 /* ---------- 2b. Sumber data "Informasi Terkini" (Safety Alert + Jadwal) ----------
@@ -34,7 +34,7 @@ const infoSource = {
   type: "sheets",
   localUrl: "assets/data/info.json",
   sheetsCsvUrl:
-    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRA4hLSBN-nkOOZeSgNpld2cdVRqUsfsxi03tugmqHKjAkm3plM81wfgwHQwzLJIg171CPyhjRqrYNG/pub?gid=779595226&single=true&output=csv",
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQQEHRyCcbOaZjCkiyn5RVcKeXMm3s4fC2c4yBxHT5YZUhK5o7kGCSTBtHMXJwH86sx0gdx-BqFN12W/pub?gid=1980726919&single=true&output=csv",
 };
 
 const employeeSource = {
