@@ -304,6 +304,12 @@ const ohsConfig = {
           icon: "cross",
           url: "https://docs.google.com/forms/d/e/1FAIpQLSeNtv2wkhEb96DUaDDaXihfTR_ErznjnXEePlSa2OitoLvxxA/viewform?usp=sharing&ouid=103258139593658311481",
         },
+        {
+          title: "Video Safety Induction",
+          desc: "Video orientasi keselamatan",
+          icon: "cross",
+          url: "https://www.youtube.com/",
+        },
       ],
     },
     {
@@ -591,9 +597,17 @@ const ohsConfig = {
 const ohsUtils = {
   /* Escape teks sebelum disisipkan ke innerHTML. */
   esc(value) {
-    return String(value).replace(/[&<>"']/g, (c) => (
-      { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
-    ));
+    return String(value).replace(
+      /[&<>"']/g,
+      (c) =>
+        ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c],
+    );
   },
 
   /* Hanya https:// yang dianggap link valid (menolak javascript:, data:, http:). */
@@ -624,5 +638,5 @@ const ohsUtils = {
   /* 95 -> "95", 92.5 -> "92,5" */
   formatNumber(n) {
     return String(Math.round(n * 10) / 10).replace(".", ",");
-  }
+  },
 };
