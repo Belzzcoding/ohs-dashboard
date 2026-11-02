@@ -345,6 +345,12 @@ const ohsConfig = {
           icon: "book-plus",
           url: "https://docs.google.com/spreadsheets/d/1KLUQz2UWLEtJfdjgdu6EG0REPHK3E1ZIfjLBfl0oYkY/edit?usp=sharing",
         },
+        {
+          title: "Rekap tamu",
+          desc: "Rekapan inputan tamu",
+          icon: "book-plus",
+          url: "https://forms.google.com"
+        },
       ],
     },
     {
