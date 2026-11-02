@@ -304,12 +304,6 @@ const ohsConfig = {
           icon: "cross",
           url: "https://docs.google.com/forms/d/e/1FAIpQLSeNtv2wkhEb96DUaDDaXihfTR_ErznjnXEePlSa2OitoLvxxA/viewform?usp=sharing&ouid=103258139593658311481",
         },
-        {
-          title: "Video Safety Induction",
-          desc: "Video orientasi keselamatan",
-          icon: "cross",
-          url: "https://www.youtube.com/",
-        },
       ],
     },
     {
@@ -344,12 +338,6 @@ const ohsConfig = {
           desc: "Rekapan inputan P2H",
           icon: "book-plus",
           url: "https://docs.google.com/spreadsheets/d/1KLUQz2UWLEtJfdjgdu6EG0REPHK3E1ZIfjLBfl0oYkY/edit?usp=sharing",
-        },
-        {
-          title: "Rekap tamu",
-          desc: "Rekapan inputan tamu",
-          icon: "book-plus",
-          url: "https://forms.google.com"
         },
       ],
     },
