@@ -43,6 +43,12 @@ const employeeSource = {
   sheetsCsvUrl: "",
 };
 
+const sotSource = {
+  type: "local",
+  localUrl: "assets/data/sot.json",
+  sheetsCsvUrl: "",
+};
+
 /* ---------- 3. Pengaturan tampilan ---------- */
 const ohsConfig = {
   defaultIndicator: "ltifr",
@@ -234,16 +240,22 @@ const ohsConfig = {
       href: "index.html",
     },
     {
-      id: "employees",
-      label: "Karyawan",
-      icon: "users",
-      href: "karyawan.html",
+      id: "reports",
+      label: "Laporan SOT",
+      icon: "clipboard-check",
+      href: "laporan_sot.html",
     },
     {
       id: "documents",
       label: "Dokumen",
       icon: "folder-open",
       href: "dokumen.html",
+    },
+    {
+      id: "employees",
+      label: "Karyawan",
+      icon: "users",
+      href: "karyawan.html",
     },
   ],
 
@@ -268,6 +280,12 @@ const ohsConfig = {
       icon: "user-plus",
     },
   ],
+
+  sot: {
+    minObserverPercent: 85,
+    departmentLimit: 5,
+    documents: [],
+  },
 
   // Menu pada halaman document
   documents: [

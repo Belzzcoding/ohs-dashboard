@@ -50,7 +50,11 @@
         <div class="header-tools">
           <div class="tool-group">
             <label for="yearSelect" class="tool-label">Tahun</label>
-            <select id="yearSelect" class="form-select form-select-sm tool-select" disabled></select>
+            <select id="yearSelect" class="form-select form-select-sm tool-select" aria-label="Filter tahun" disabled></select>
+          </div>
+          <div class="tool-group">
+            <label for="monthSelect" class="tool-label">Bulan</label>
+            <select id="monthSelect" class="form-select form-select-sm tool-select" aria-label="Filter bulan" disabled></select>
           </div>
           <div class="updated" id="lastUpdated" aria-live="polite">
             <span class="updated-label">Terakhir diperbarui</span>
@@ -87,7 +91,7 @@
               Periksa koneksi atau sumber data, lalu coba lagi.
             </div>
           </div>
-          <button type="button" class="btn btn-sm btn-outline-primary ms-auto"id="retryBtn">
+          <button type="button" class="btn btn-sm btn-outline-primary ms-auto" id="retryBtn">
             Coba lagi
           </button>
         </div>
@@ -153,7 +157,7 @@
             </section>
           </div>
 
-          <div class="dash-right">
+            <div class="dash-right">
             <section class="dash-alert alert-card" id="alertCard" aria-labelledby="alertHeading" hidden>
               <h2 class="alert-title" id="alertHeading"><i data-lucide="triangle-alert" aria-hidden="true"></i>Safety Alert</h2>
               <p class="alert-text" id="alertText"></p>
@@ -178,8 +182,8 @@
                 <div class="row quick-compact" id="quickGrid"></div>
               </div>
             </section>
+            </div>
           </div>
-        </div>
         </div>
 
         <footer class="app-footer">

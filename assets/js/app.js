@@ -10,7 +10,7 @@
 
   /* ---------- Sidebar (menu dari ohsConfig.nav) ---------- */
   function renderNav() {
-    const current = document.body.dataset.page; // "dashboard" atau "documents"
+    const current = document.body.dataset.page; // id halaman aktif (lihat ohsConfig.nav)
     $("navList").innerHTML = ohsConfig.nav
       .map((item) => {
         const active = item.id === current;
@@ -203,7 +203,10 @@
     
     // bagian khusus halaman Karyawan
     if ($("employees")) Employees.start();
-    
+
+    // bagian khusus halaman Laporan SOT
+    if ($("sot")) Sot.start();
+
     ohsUtils.icons();
   });
 })();

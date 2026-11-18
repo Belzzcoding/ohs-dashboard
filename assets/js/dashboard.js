@@ -18,8 +18,10 @@ const Dashboard = (() => {
   const state = {
     model: null,
     year: null,
+    month: null,
     indicatorId: cfg.defaultIndicator,
     chart: null,
+    totalChart: null,
   };
 
   /* ---------- Akses data ---------- */
@@ -33,11 +35,23 @@ const Dashboard = (() => {
     return y ? y.indicators.find((i) => i.id === id) || null : null;
   };
 
-  /* Bulan terakhir yang punya data (bukan null). */
-  const latestEntry = (ind) => {
-    const filled = ind.monthly.filter((m) => m.performance !== null);
-    return filled.length ? filled[filled.length - 1] : null;
+  /* Bulan terakhir yang punya data di antara semua indikator tahun aktif. */
+  const latestDataMonth = () => {
+    const y = yearData();
+    if (!y) return null;
+    let latest = 0;
+    y.indicators.forEach((ind) => {
+      ind.monthly.forEach((m) => {
+        if (m.performance !== null) latest = Math.max(latest, m.month);
+      });
+    });
+    return latest || null;
   };
+
+  /* Entri indikator untuk bulan yang sedang dipilih di header. */
+  const selectedEntry = (ind) =>
+    ind && state.month ? ind.monthly[state.month - 1] || null : null;
+
   const previousEntry = (ind, latest) => {
     const earlier = ind.monthly.filter(
       (m) => m.performance !== null && m.month < latest.month,
@@ -83,6 +97,27 @@ const Dashboard = (() => {
       $(id).disabled = years.length === 0;
     });
 
+    // Bulan aktif harus punya data di tahun terpilih; jika tidak, pakai bulan terakhir yang tersedia.
+    const y = yearData();
+    const monthHasData =
+      y &&
+      state.month !== null &&
+      y.indicators.some((ind) => {
+        const entry = ind.monthly[state.month - 1];
+        return (
+          entry && (entry.performance !== null || entry.realisasi !== null)
+        );
+      });
+    if (!monthHasData) state.month = latestDataMonth() || 1;
+
+    $("monthSelect").innerHTML = cfg.monthsShort
+      .map(
+        (label, i) =>
+          `<option value="${i + 1}"${i + 1 === state.month ? " selected" : ""}>${esc(label)}</option>`,
+      )
+      .join("");
+    $("monthSelect").disabled = !y;
+
     $("indicatorSelect").innerHTML = cfg.indicators
       .map(
         (d) =>
@@ -93,17 +128,18 @@ const Dashboard = (() => {
 
   /* ---------- KPI ---------- */
   function kpiCard(def, ind) {
-    const latest = ind ? latestEntry(ind) : null;
-    const prev = latest ? previousEntry(ind, latest) : null;
+    const current = selectedEntry(ind);
+    const hasScore = current && current.performance !== null;
+    const prev = hasScore ? previousEntry(ind, current) : null;
 
-    const value = latest
-      ? `${formatNumber(latest.performance)}<span class="unit">%</span>`
+    const value = hasScore
+      ? `${formatNumber(current.performance)}<span class="unit">%</span>`
       : `&ndash;`;
 
     let trend = "";
-    if (latest && prev) {
+    if (hasScore && prev) {
       const delta =
-        Math.round((latest.performance - prev.performance) * 10) / 10;
+        Math.round((current.performance - prev.performance) * 10) / 10;
       const icon =
         delta > 0 ? "arrow-up-right" : delta < 0 ? "arrow-down-right" : "minus";
       const text =
@@ -113,15 +149,15 @@ const Dashboard = (() => {
       trend = `<span class="kpi-trend"><i data-lucide="${icon}" aria-hidden="true"></i>${text} vs ${cfg.monthsShort[prev.month - 1]}</span>`;
     }
 
-    const meta = latest ? Scoring.summaryText(def, latest) : "";
+    const meta = current ? Scoring.summaryText(def, current) : "";
     const ytdLine =
-      latest && cfg.scoring.showYtd && latest.ytd
-        ? `<div class="kpi-foot kpi-ytd">${esc(Scoring.ytdText(def, latest.ytd))}</div>`
+      hasScore && cfg.scoring.showYtd && current.ytd
+        ? `<div class="kpi-foot kpi-ytd">${esc(Scoring.ytdText(def, current.ytd))}</div>`
         : "";
 
-    const ariaLabel = latest
-      ? `Lihat detail indikator ${def.name}, skor ${formatNumber(latest.performance)} persen, status ${statusDef(latest.status).label}`
-      : `Lihat detail indikator ${def.name}, belum ada data`;
+    const ariaLabel = hasScore
+      ? `Lihat detail indikator ${def.name}, ${cfg.monthsLong[current.month - 1]} ${state.year}, skor ${formatNumber(current.performance)} persen, status ${statusDef(current.status).label}`
+      : `Lihat detail indikator ${def.name}, belum ada data untuk ${cfg.monthsLong[state.month - 1]} ${state.year}`;
 
     const fullName =
       def.fullName && def.fullName !== def.name
@@ -140,7 +176,7 @@ const Dashboard = (() => {
           </div>
           <div class="kpi-value">${value}</div>
           <div class="kpi-bottom">
-            <div class="kpi-foot">${badge(latest ? latest.status : null)}${trend}</div>
+            <div class="kpi-foot">${badge(current ? current.status : null)}${trend}</div>
             <div class="kpi-foot">${esc(meta)}</div>
             ${ytdLine}
             <div class="kpi-foot"><button type="button" class="kpi-more stretched-link" data-indicator-id="${esc(def.id)}" aria-haspopup="dialog" aria-label="${esc(ariaLabel)}">Lihat detail<i data-lucide="chevron-right" aria-hidden="true"></i></button></div>
@@ -151,66 +187,55 @@ const Dashboard = (() => {
 
   function renderKpis() {
     const grid = $("kpiGrid");
-    if (!yearData()) {
+    const y = yearData();
+    if (!y) {
       grid.innerHTML = `<div class="col-12"><div class="state-box">${EMPTY_TEXT}</div></div>`;
-      $("periodLabel").textContent =
-        state.year !== null ? String(state.year) : "-";
+      $("periodLabel").textContent = "-";
       return;
     }
     grid.innerHTML = cfg.indicators
       .map((def) => kpiCard(def, getIndicator(def.id)))
       .join("");
 
-    // Periode: tahun + bulan terakhir yang punya data di antara semua indikator.
-    const lastMonth = Math.max(
-      0,
-      ...cfg.indicators.map((d) => {
-        const ind = getIndicator(d.id);
-        const l = ind ? latestEntry(ind) : null;
-        return l ? l.month : 0;
-      }),
-    );
-    $("periodLabel").textContent = lastMonth
-      ? `${state.year} · data s.d. ${cfg.monthsLong[lastMonth - 1]}`
-      : String(state.year);
+    const monthName = cfg.monthsLong[state.month - 1];
+    const hasData = y.indicators.some((ind) => {
+      const entry = ind.monthly[state.month - 1];
+      return entry && (entry.performance !== null || entry.realisasi !== null);
+    });
+    $("periodLabel").textContent = hasData
+      ? `${monthName} ${state.year}`
+      : `${monthName} ${state.year} · belum ada data`;
   }
 
   /* ---------- Skor total ----------
-     Bulan terakhir di mana KEDELAPAN indikator sudah terisi (skor sebagian tidak ditampilkan).
-     Rincian kontribusi tiap indikator ada di <details> agar hitungannya bisa ditelusuri. */
+     Skor bulan yang sedang dipilih di header. Bila kedelapan indikator belum
+     terisi pada bulan itu, skor total tidak ditampilkan (tidak memakai bulan lain). */
   function renderTotal() {
     const box = $("totalCard");
     const y = yearData();
+    const month = state.month || 1;
     const totals = y ? Scoring.totalByMonth(y.indicators) : [];
     const totalsYtd = y ? Scoring.totalByMonth(y.indicators, "ytd") : [];
-    const done = totals.filter((t) => t.total !== null);
-    if (!done.length) {
-      box.innerHTML = `
-        <div class="total-main">
-          <div class="total-label">${esc(cfg.scoring.totalLabel)}</div>
-          <div class="total-value">&ndash;</div>
-          <p class="total-sub">Skor total dihitung setelah kedelapan indikator terisi pada bulan yang sama.</p>
-        </div>`;
-      return;
-    }
-    const cur = done[done.length - 1];
-    const monthName = cfg.monthsLong[cur.month - 1];
-    const ytdCur = totalsYtd[cur.month - 1];
-    const useYtd = cfg.scoring.showYtd && ytdCur && ytdCur.total !== null;
+    const cur = totals[month - 1] || null;
+    const hasTotal = cur && cur.total !== null;
+    const monthName = cfg.monthsLong[month - 1];
+    const yearLabel = state.year ?? "-";
+    const ytdCur = totalsYtd[month - 1] || null;
+    const useYtd =
+      hasTotal && cfg.scoring.showYtd && ytdCur && ytdCur.total !== null;
     const main = useYtd ? ytdCur : cur;
-    const prev = useYtd
-      ? cur.month > 1
-        ? totalsYtd[cur.month - 2]
-        : null
-      : done.length > 1
-        ? done[done.length - 2]
-        : null;
-    const hasPrev = prev && prev.total !== null;
-    const status = main.passed ? "met" : "notMet";
-    const when = cur.month === 1 ? monthName : `Januari–${monthName}`;
+    const sourceTotals = useYtd ? totalsYtd : totals;
+    const prev = hasTotal
+      ? sourceTotals
+          .slice(0, month - 1)
+          .reverse()
+          .find((t) => t.total !== null) || null
+      : null;
+    const status = hasTotal ? (main.passed ? "met" : "notMet") : null;
+    const when = month === 1 ? monthName : `Januari–${monthName}`;
 
     let trend = "";
-    if (hasPrev) {
+    if (hasTotal && prev && prev.total !== null) {
       const delta = Math.round((main.total - prev.total) * 10) / 10;
       const icon =
         delta > 0 ? "arrow-up-right" : delta < 0 ? "arrow-down-right" : "minus";
@@ -221,47 +246,96 @@ const Dashboard = (() => {
       trend = `<span class="kpi-trend"><i data-lucide="${icon}" aria-hidden="true"></i>${text} vs ${cfg.monthsShort[prev.month - 1]}</span>`;
     }
 
-    const basis = useYtd
-      ? `Target ≥ ${cfg.scoring.totalTarget}% · YTD ${esc(when)} ${state.year}`
-      : cfg.scoring.showYtd
-        ? `Target ≥ ${cfg.scoring.totalTarget}% · skor bulan ${esc(monthName)} ${state.year} (YTD belum lengkap)`
-        : `Target ≥ ${cfg.scoring.totalTarget}% · skor bulan ${esc(monthName)} ${state.year}`;
+    const basis = hasTotal
+      ? useYtd
+        ? `Target ≥ ${cfg.scoring.totalTarget}% · YTD ${esc(when)} ${yearLabel}`
+        : cfg.scoring.showYtd
+          ? `Target ≥ ${cfg.scoring.totalTarget}% · skor bulan ${esc(monthName)} ${yearLabel} (YTD belum lengkap)`
+          : `Target ≥ ${cfg.scoring.totalTarget}% · skor bulan ${esc(monthName)} ${yearLabel}`
+      : `Target ≥ ${cfg.scoring.totalTarget}% · skor bulan ${esc(monthName)} ${yearLabel}`;
     const monthLine = useYtd
       ? `<p class="total-sub">Skor bulan ${esc(monthName)}: ${formatNumber(cur.total)}%</p>`
       : "";
 
-    const rows = cfg.indicators
-      .map((def) => {
-        const entry = getIndicator(def.id).monthly[cur.month - 1];
-        const score = useYtd ? entry.ytd.performance : entry.performance;
-        const points = (def.weight / 100) * score;
-        return `
+    let totalMain;
+    let details;
+    if (hasTotal) {
+      const rows = cfg.indicators
+        .map((def) => {
+          const entry = getIndicator(def.id).monthly[month - 1];
+          const score = useYtd ? entry.ytd.performance : entry.performance;
+          const points = (def.weight / 100) * score;
+          return `
         <tr>
           <th scope="row">${esc(def.name)}</th>
           <td>${def.weight}%</td>
           <td>${formatNumber(score)}%</td>
           <td>${formatNumber(points)}</td>
         </tr>`;
-      })
-      .join("");
+        })
+        .join("");
+
+      totalMain = `
+        <div class="total-main">
+          <div class="total-label">${esc(cfg.scoring.totalLabel)}</div>
+          <div class="total-value">${formatNumber(main.total)}<span class="unit">%</span></div>
+          <div class="kpi-foot">${badge(status)}${trend}</div>
+          <p class="total-sub">${basis}</p>
+          ${monthLine}
+        </div>`;
+      details = `
+        <details class="total-detail">
+          <summary>Lihat perhitungan skor total</summary>
+          <table class="table table-sm total-table">
+            <caption class="visually-hidden">Kontribusi tiap indikator pada skor total ${useYtd ? "YTD " + esc(when) : esc(monthName)} ${yearLabel}</caption>
+            <thead><tr><th scope="col">Indikator</th><th scope="col">Bobot</th><th scope="col">Skor${useYtd ? " YTD" : ""}</th><th scope="col">Poin</th></tr></thead>
+            <tbody>${rows}</tbody>
+            <tfoot><tr><th scope="row">Total</th><td>100%</td><td></td><td>${formatNumber(main.total)}</td></tr></tfoot>
+          </table>
+        </details>`;
+    } else {
+      const hasAnyData =
+        y &&
+        y.indicators.some((ind) => {
+          const entry = ind.monthly[month - 1];
+          return (
+            entry && (entry.realisasi !== null || entry.performance !== null)
+          );
+        });
+      const message = hasAnyData
+        ? `Skor total bulan ${esc(monthName)} ${yearLabel} belum dapat dihitung karena belum semua indikator terisi.`
+        : `Belum ada data untuk bulan ${esc(monthName)} ${yearLabel}.`;
+      totalMain = `
+        <div class="total-main">
+          <div class="total-label">${esc(cfg.scoring.totalLabel)}</div>
+          <div class="total-value">&ndash;</div>
+          <div class="kpi-foot">${badge(null)}</div>
+          <p class="total-sub">${message}</p>
+          <p class="total-sub">${basis}</p>
+        </div>`;
+      details = `<p class="total-note">Rincian kontribusi indikator tampil setelah kedelapan indikator terisi pada bulan yang sama.</p>`;
+    }
 
     box.innerHTML = `
-      <div class="total-main">
-        <div class="total-label">${esc(cfg.scoring.totalLabel)}</div>
-        <div class="total-value">${formatNumber(main.total)}<span class="unit">%</span></div>
-        <div class="kpi-foot">${badge(status)}${trend}</div>
-        <p class="total-sub">${basis}</p>
-        ${monthLine}
+      ${totalMain}
+      <div class="total-chart">
+        <div class="total-chart-head">
+          <span class="total-chart-title">Tren Skor Total ${state.year ?? "-"}</span>
+          <span class="total-chart-badge">Target ≥ ${cfg.scoring.totalTarget}%</span>
+        </div>
+        <div class="total-chart-wrap">
+          <canvas id="totalChart" role="img" aria-label="Grafik tren skor total Safety Performance tahun ${state.year ?? "-"}"></canvas>
+          <div class="chart-empty" id="totalChartEmpty" hidden>Belum ada data skor total untuk tahun ini.</div>
+        </div>
+        <div class="visually-hidden">
+          <table id="totalChartTable">
+            <caption>Data skor total per bulan ${state.year ?? "-"}</caption>
+            <thead><tr><th scope="col">Bulan</th><th scope="col">Skor total</th><th scope="col">Status</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
-      <details class="total-detail">
-        <summary>Lihat perhitungan skor total</summary>
-        <table class="table table-sm total-table">
-          <caption class="visually-hidden">Kontribusi tiap indikator pada skor total ${useYtd ? "YTD " + esc(when) : esc(monthName)} ${state.year}</caption>
-          <thead><tr><th scope="col">Indikator</th><th scope="col">Bobot</th><th scope="col">Skor${useYtd ? " YTD" : ""}</th><th scope="col">Poin</th></tr></thead>
-          <tbody>${rows}</tbody>
-          <tfoot><tr><th scope="row">Total</th><td>100%</td><td></td><td>${formatNumber(main.total)}</td></tr></tfoot>
-        </table>
-      </details>`;
+      ${details}`;
   }
 
   /* ---------- Ringkasan status ---------- */
@@ -273,13 +347,14 @@ const Dashboard = (() => {
       list.innerHTML = `<li>${EMPTY_TEXT}</li>`;
       return;
     }
-    sub.textContent = `Status bulan terbaru (bulan itu) dari tiap indikator, ${state.year}.`;
+    sub.textContent = `Status bulan ${cfg.monthsLong[state.month - 1]} ${state.year} dari tiap indikator.`;
 
     const groups = { met: [], notMet: [], none: [] };
     cfg.indicators.forEach((def) => {
       const ind = getIndicator(def.id);
-      const latest = ind ? latestEntry(ind) : null;
-      const key = latest && groups[latest.status] ? latest.status : "none";
+      const current = selectedEntry(ind);
+      const key =
+        current && groups[current.status] ? current.status : "none";
       groups[key].push(def.name);
     });
 
@@ -452,6 +527,138 @@ const Dashboard = (() => {
       .join("");
   }
 
+  /* ---------- Chart tren skor total (kartu Skor Safety Performance) ---------- */
+  function setTotalChartEmpty(message) {
+    if (state.totalChart) {
+      state.totalChart.destroy();
+      state.totalChart = null;
+    }
+    const canvas = $("totalChart");
+    if (canvas) canvas.hidden = true;
+    const empty = $("totalChartEmpty");
+    if (empty) {
+      empty.textContent = message;
+      empty.hidden = false;
+    }
+    const tbody = $("totalChartTable")?.querySelector("tbody");
+    if (tbody) tbody.innerHTML = "";
+  }
+
+  function renderTotalChart() {
+    const y = yearData();
+    const totals = y ? Scoring.totalByMonth(y.indicators) : [];
+    const hasData = totals.some((t) => t.total !== null);
+    if (!hasData) {
+      setTotalChartEmpty("Belum ada data skor total untuk tahun ini.");
+      return;
+    }
+    if (typeof Chart === "undefined") {
+      setTotalChartEmpty("Grafik tidak dapat dimuat.");
+      return;
+    }
+
+    const canvas = $("totalChart");
+    if (!canvas) return;
+    canvas.hidden = false;
+    const empty = $("totalChartEmpty");
+    if (empty) empty.hidden = true;
+
+    const labels = cfg.monthsShort;
+    const values = totals.map((t) => t.total);
+    const selectedIndex = state.month - 1;
+    const numbered = values.filter((v) => v !== null);
+    const lowest = Math.min(...numbered);
+    const ctx = canvas.getContext("2d");
+    const gradient = ctx.createLinearGradient(0, 0, 0, 170);
+    gradient.addColorStop(0, "rgba(37, 99, 235, 0.24)");
+    gradient.addColorStop(1, "rgba(37, 99, 235, 0)");
+
+    if (state.totalChart) {
+      state.totalChart.destroy();
+      state.totalChart = null;
+    }
+
+    Chart.defaults.font.family = '"Inter", system-ui, sans-serif';
+    Chart.defaults.color = "#64748B";
+    state.totalChart = new Chart(canvas, {
+      type: "line",
+      data: {
+        labels,
+        datasets: [
+          {
+            label: "Skor total",
+            data: values,
+            borderColor: "#2563EB",
+            backgroundColor: gradient,
+            fill: true,
+            borderWidth: 2.5,
+            tension: 0.4,
+            spanGaps: false,
+            pointRadius: (context) =>
+              context.dataIndex === selectedIndex && context.raw !== null
+                ? 5
+                : 0,
+            pointHoverRadius: 6,
+            pointBackgroundColor: "#2563EB",
+            pointBorderColor: "#FFFFFF",
+            pointBorderWidth: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 300 },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            filter: (item) => item.raw !== null,
+            callbacks: {
+              title: (items) =>
+                `${cfg.monthsLong[items[0].dataIndex]} ${state.year}`,
+              label: (item) => {
+                const passed = item.raw >= cfg.scoring.totalTarget;
+                return `Skor total: ${formatNumber(item.raw)}% · ${statusDef(passed ? "met" : "notMet").label}`;
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            border: { display: false },
+            ticks: { maxRotation: 0, autoSkip: true, font: { size: 10 } },
+          },
+          y: {
+            display: false,
+            suggestedMin: Math.max(0, lowest - 5),
+            suggestedMax: 100,
+          },
+        },
+      },
+    });
+
+    canvas.setAttribute(
+      "aria-label",
+      `Grafik tren skor total Safety Performance tahun ${state.year}. Bulan terpilih: ${cfg.monthsLong[selectedIndex]}. Data lengkap tersedia di tabel tersembunyi.`,
+    );
+
+    const tbody = $("totalChartTable")?.querySelector("tbody");
+    if (tbody) {
+      tbody.innerHTML = totals
+        .map(
+          (t, i) => `
+        <tr${i === selectedIndex ? ' class="is-latest"' : ""}>
+          <th scope="row">${cfg.monthsLong[i]}</th>
+          <td>${t.total === null ? "Belum lengkap" : formatNumber(t.total) + "%"}</td>
+          <td>${t.total === null ? "&ndash;" : esc(statusDef(t.passed ? "met" : "notMet").label)}</td>
+        </tr>`,
+        )
+        .join("");
+    }
+  }
+
   /* ---------- Popup detail KPI ----------
      Klik kartu KPI -> popup: skor + status + realisasi, grafik (chartType dari config),
      penjelasan hitungan, rumus, batas Tercapai, bobot. Skor dan status dihitung oleh
@@ -476,7 +683,8 @@ const Dashboard = (() => {
   }
 
   function modalBodyHtml(def, ind) {
-    const latest = latestEntry(ind);
+    const current = selectedEntry(ind);
+    const hasScore = current && current.performance !== null;
     const unit = '<span class="unit">%</span>';
     const hasData = ind.monthly.some((m) => m.performance !== null);
     const type = ["line", "bar", "doughnut"].includes(def.chartType)
@@ -488,9 +696,9 @@ const Dashboard = (() => {
 
     const headline = `
       <div class="kpi-headline">
-        <div class="kpi-big">${latest ? formatNumber(latest.performance) + unit : "&ndash;"}</div>
-        <div>${badge(latest ? latest.status : null)}</div>
-        <div class="kpi-target">${latest ? esc(Scoring.summaryText(def, latest)) : "Target " + esc(Scoring.targetText(def))}</div>
+        <div class="kpi-big">${hasScore ? formatNumber(current.performance) + unit : "&ndash;"}</div>
+        <div>${badge(hasScore ? current.status : null)}</div>
+        <div class="kpi-target">${current ? esc(Scoring.summaryText(def, current)) : "Target " + esc(Scoring.targetText(def))}</div>
       </div>`;
 
     const note = {
@@ -512,12 +720,12 @@ const Dashboard = (() => {
     const why = `
       <section class="kpi-why" aria-labelledby="kpiWhyTitle">
         <h3 class="kpi-sec-title" id="kpiWhyTitle">Mengapa nilainya demikian?</h3>
-        <p class="kpi-explain">${buildExplanation(def, latest)}</p>
+        <p class="kpi-explain">${buildExplanation(def, current)}</p>
         ${def.explanationTemplate && String(def.explanationTemplate).trim() ? `<p class="kpi-explain">${esc(def.explanationTemplate)}</p>` : ""}
         <dl class="kpi-notes">
           <dt>Rumus</dt>
           <dd>${textOrEmpty(def.formulaText)}</dd>
-          <dt>Batas Tercapai</dt><dd>${esc(Scoring.targetText(def, latest ? latest.target : null))}</dd>
+          <dt>Batas Tercapai</dt><dd>${esc(Scoring.targetText(def, current ? current.target : null))}</dd>
           <dt>Bobot skor total</dt><dd>${def.weight}%</dd>
           <dt>Sumber aturan</dt><dd>${esc(cfg.scoring.sourceNote)}</dd>
         </dl>
@@ -542,7 +750,7 @@ const Dashboard = (() => {
         <tbody>${ind.monthly
           .map(
             (m) => `
-          <tr${latest && m.month === latest.month ? ' class="is-latest"' : ""}>
+          <tr${current && m.month === current.month ? ' class="is-latest"' : ""}>
             <th scope="row">${cfg.monthsLong[m.month - 1]}</th>
             <td>${m.realisasi === null ? '<span class="kpi-muted">Belum ada data</span>' : esc(Scoring.actualText(def, m))}</td>
             <td>${m.performance === null ? "&ndash;" : formatNumber(m.performance) + "%"}</td>
@@ -754,14 +962,14 @@ const Dashboard = (() => {
     const def = defOf(id);
     const ind = getIndicator(id);
     if (!def || !ind) return;
-    const latest = latestEntry(ind);
+    const current = selectedEntry(ind);
     modal.id = id;
     $("kpiDetailTitle").textContent = def.name;
     $("kpiModalSub").textContent =
       (def.fullName && def.fullName !== def.name ? def.fullName + " · " : "") +
-      (latest
-        ? `Data terakhir: ${cfg.monthsLong[latest.month - 1]} ${state.year}`
-        : `Tahun ${state.year}`);
+      (current
+        ? `Data: ${cfg.monthsLong[current.month - 1]} ${state.year}`
+        : `Bulan ${cfg.monthsLong[state.month - 1]} ${state.year}`);
     $("kpiModalBody").innerHTML = modalBodyHtml(def, ind);
     ohsUtils.icons();
     bootstrap.Modal.getOrCreateInstance($("kpiModal")).show();
@@ -793,6 +1001,7 @@ const Dashboard = (() => {
     renderKpis();
     renderSummary();
     renderChart();
+    renderTotalChart();
     ohsUtils.icons();
   }
 
@@ -811,9 +1020,14 @@ const Dashboard = (() => {
       state.indicatorId = e.target.value;
       renderChart();
     });
+    $("monthSelect").addEventListener("change", (e) => {
+      state.month = Number(e.target.value);
+      renderAll();
+    });
     const onYear = (e) => {
       state.year = Number(e.target.value);
       $("yearSelect").value = $("yearSelectChart").value = String(state.year);
+      renderControls();
       renderAll();
     };
     $("yearSelect").addEventListener("change", onYear);

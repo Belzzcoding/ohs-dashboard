@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laporan SOT</title>
+  <meta name="description" content="Rekap pelaksanaan Safety Observation Tour (SOT) unit OHS PT Semen Tonasa." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/sot.css" />
+  <link rel="icon" type="image/png" href="assets/img/logo-k3.png" />
+</head>
+
+<body data-page="reports">
+  <aside class="sidebar offcanvas-xl offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarTitle">
+    <div class="sidebar-brand">
+      <div class="brand-logo" aria-hidden="true">
+        <img src="assets/img/logo-semen-tonasa.png" alt="" />
+      </div>
+      <div class="brand-text">
+        <div class="brand-name" id="sidebarTitle">PT. SEMEN TONASA</div>
+        <div class="brand-sub">Occupational Health &amp; Safety</div>
+      </div>
+      <button type="button" class="btn-close btn-close-white d-xl-none ms-auto" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Tutup menu"></button>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Menu utama">
+      <ul class="nav-list" id="navList"></ul>
+    </nav>
+    <div class="sidebar-foot">Est. 2026</div>
+  </aside>
+
+  <div class="app-main">
+    <header class="app-header">
+      <button type="button" class="icon-btn" id="menuToggle" aria-controls="sidebar" aria-expanded="true" aria-label="Menu navigasi">
+        <i data-lucide="menu"></i>
+      </button>
+      <div class="header-title">
+        <h1 class="page-title">Laporan SOT</h1>
+        <p class="clock" id="clock"><time id="clockValue">-</time></p>
+      </div>
+      <div class="header-tools">
+        <div class="updated" id="lastUpdated" aria-live="polite">
+          <span class="updated-label">Terakhir diperbarui</span>
+          <span class="updated-value" id="lastUpdatedValue">-</span>
+        </div>
+        <button type="button" class="icon-btn" id="refreshBtn" aria-label="Muat ulang data SOT">
+          <i data-lucide="refresh-cw"></i>
+        </button>
+      </div>
+    </header>
+
+    <main id="main" class="content" tabindex="-1">
+      <div class="mock-banner" id="mockBanner" hidden role="note">
+        <i data-lucide="info" aria-hidden="true"></i>
+        <span><strong>Data contoh.</strong> Angka, departemen, dan biro/seksi di bawah hanya placeholder pengembangan, bukan data resmi OHS.</span>
+      </div>
+
+      <div class="state-box" id="stateLoading" role="status" aria-live="polite">
+        <div class="spinner-border spinner-border-sm text-primary" aria-hidden="true"></div>
+        <span>Memuat data SOT&hellip;</span>
+      </div>
+
+      <div class="state-box state-error" id="stateError" role="alert" hidden>
+        <i data-lucide="triangle-alert" aria-hidden="true"></i>
+        <div>
+          <div class="state-title">Data SOT belum dapat dimuat.</div>
+          <div class="state-sub">Periksa koneksi atau sumber data, lalu coba lagi.</div>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-primary ms-auto" id="retryBtn">Coba lagi</button>
+      </div>
+
+      <div id="sot" hidden>
+        <section class="section" aria-labelledby="filterHeading">
+          <div class="card-panel">
+            <div class="section-head section-head-wrap">
+              <h2 class="section-title" id="filterHeading">Filter Laporan SOT</h2>
+              <button type="button" class="btn btn-sm btn-outline-primary d-lg-none" id="filterToggle" data-bs-toggle="collapse" data-bs-target="#sotFilterBody" aria-expanded="false" aria-controls="sotFilterBody">
+                <i data-lucide="sliders-horizontal" aria-hidden="true"></i>
+                Filter
+              </button>
+            </div>
+
+            <div class="collapse d-lg-block" id="sotFilterBody">
+              <form class="sot-filter-grid" id="sotFilterForm" autocomplete="off">
+                <div class="sot-filter-field">
+                  <label for="sotPeriod" class="tool-label">Periode Bulan</label>
+                  <select id="sotPeriod" class="form-select form-select-sm tool-select"></select>
+                </div>
+                <div class="sot-filter-field">
+                  <label for="sotDepartment" class="tool-label">Departemen</label>
+                  <select id="sotDepartment" class="form-select form-select-sm tool-select"></select>
+                </div>
+                <div class="sot-filter-field">
+                  <label for="sotBiro" class="tool-label">Biro Operasional</label>
+                  <select id="sotBiro" class="form-select form-select-sm tool-select"></select>
+                </div>
+                <div class="sot-filter-field">
+                  <label for="sotSeksi" class="tool-label">Seksi / Regu Kerja</label>
+                  <select id="sotSeksi" class="form-select form-select-sm tool-select"></select>
+                </div>
+                <div class="sot-filter-actions">
+                  <button type="button" class="btn btn-sm btn-outline-secondary" id="sotReset">Reset</button>
+                  <button type="submit" class="btn btn-sm btn-primary">Terapkan Filter</button>
+                </div>
+              </form>
+              <p class="section-meta sot-filter-status mb-0" id="sotFilterStatus" role="status"></p>
+            </div>
+          </div>
+        </section>
+
+        <div class="state-box" id="sotEmpty" role="status" hidden>
+          <i data-lucide="inbox" aria-hidden="true"></i>
+          <div>
+            <div class="state-title">Belum ada data SOT untuk periode ini.</div>
+            <div class="state-sub">Pilih periode lain untuk melihat data.</div>
+          </div>
+        </div>
+
+        <div class="state-box" id="sotFilterEmpty" role="status" hidden>
+          <i data-lucide="filter-x" aria-hidden="true"></i>
+          <div>
+            <div class="state-title">Tidak ada data untuk filter ini.</div>
+            <div class="state-sub">Kembalikan filter ke seluruh departemen atau pilih periode lain.</div>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-primary ms-auto" id="sotEmptyReset">Reset</button>
+        </div>
+
+        <div id="sotData">
+          <section class="section" aria-labelledby="sotKpiHeading">
+            <div class="section-head">
+              <h2 class="section-title" id="sotKpiHeading">Ringkasan Laporan SOT</h2>
+              <span class="section-meta">Periode: <strong id="periodLabel">-</strong></span>
+            </div>
+            <div class="row g-3" id="kpiGrid"></div>
+          </section>
+
+          <section class="section" aria-labelledby="observerHeading">
+            <div class="card-panel">
+              <div class="section-head section-head-wrap">
+                <div>
+                  <h2 class="section-title" id="observerHeading">Pengamat vs Target per Departemen</h2>
+                  <p class="section-meta mb-0" id="observerSub"></p>
+                </div>
+                <div class="sot-legend" aria-label="Legenda grafik">
+                  <span class="sot-legend-item"><span class="sot-swatch sot-swatch-target"></span>Target</span>
+                  <span class="sot-legend-item"><span class="sot-swatch sot-swatch-actual"></span>Aktual</span>
+                  <span class="sot-legend-item sot-legend-rate"><span class="sot-swatch sot-swatch-rate"></span>Persentase</span>
+                  <span class="sot-legend-item sot-legend-min"><span class="sot-swatch sot-swatch-min"></span>Target min. <span id="minTargetLegend">85</span>%</span>
+                </div>
+              </div>
+
+              <div class="chart-wrap sot-chart-wrap" id="observerChartWrap">
+                <canvas id="observerChart" role="img" aria-label="Grafik jumlah pengamat aktual dan target per departemen"></canvas>
+                <div class="chart-empty" id="observerChartEmpty" hidden>Belum ada data departemen.</div>
+              </div>
+              <p class="chart-note" id="observerNote"></p>
+
+              <div class="sot-dept-summary" id="deptSummary"></div>
+
+              <div class="visually-hidden">
+                <table id="observerTable">
+                  <caption>Pengamat aktual dan target per departemen</caption>
+                  <thead>
+                    <tr><th scope="col">Departemen</th><th scope="col">Target pengamat</th><th scope="col">Aktual pengamat</th><th scope="col">Kepatuhan</th></tr>
+                  </thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <div class="sot-main-grid section">
+            <section aria-labelledby="distributionHeading">
+              <div class="card-panel">
+                <div class="section-head">
+                  <h2 class="section-title" id="distributionHeading">Distribusi Observasi per Departemen</h2>
+                  <span class="section-meta" id="distributionSub"></span>
+                </div>
+
+                <div class="sot-dist-list" id="distributionList"></div>
+                <button type="button" class="btn btn-sm btn-outline-primary mt-3" id="showAllDepts" hidden>Tampilkan semua departemen</button>
+
+                <div class="visually-hidden">
+                  <table id="distributionTable">
+                    <caption>Distribusi observasi aman dan tidak aman per departemen</caption>
+                    <thead>
+                      <tr><th scope="col">Departemen</th><th scope="col">Aman</th><th scope="col">Tidak aman</th><th scope="col">Total</th><th scope="col">Selesai tindak lanjut</th><th scope="col">Masih proses</th></tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <div class="sot-side">
+              <section aria-labelledby="ratioHeading">
+                <div class="card-panel">
+                  <div class="section-head">
+                    <h2 class="section-title" id="ratioHeading">Rasio Temuan SOT</h2>
+                  </div>
+                  <div class="sot-donut-wrap">
+                    <canvas id="ratioChart" role="img" aria-label="Grafik donat rasio observasi aman dan tidak aman"></canvas>
+                    <div class="sot-donut-center">
+                      <span class="sot-donut-value" id="ratioValue">-</span>
+                      <span class="sot-donut-label">Observasi aman</span>
+                    </div>
+                  </div>
+                  <p class="sot-ratio-legend" id="ratioLegend"></p>
+
+                  <div class="visually-hidden">
+                    <table id="ratioTable">
+                      <caption>Rasio observasi aman dan tidak aman</caption>
+                      <thead><tr><th scope="col">Kategori</th><th scope="col">Jumlah</th><th scope="col">Persentase</th></tr></thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+
+              <section aria-labelledby="followupHeading">
+                <div class="card-panel">
+                  <div class="section-head">
+                    <h2 class="section-title" id="followupHeading">Status Tindak Lanjut</h2>
+                    <span class="section-meta" id="followupTotal"></span>
+                  </div>
+                  <div id="followupBody"></div>
+                </div>
+              </section>
+
+              <section aria-labelledby="docsHeading" id="sotDocsCard" hidden>
+                <div class="card-panel">
+                  <div class="section-head">
+                    <h2 class="section-title" id="docsHeading">Dokumen SOT</h2>
+                  </div>
+                  <div class="sot-doc-list" id="sotDocsList"></div>
+                  <a href="dokumen.html" class="btn btn-sm btn-outline-primary mt-3">Lihat semua dokumen</a>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <section class="section" aria-labelledby="trendHeading">
+            <div class="card-panel">
+              <div class="section-head section-head-wrap">
+                <div>
+                  <h2 class="section-title" id="trendHeading">Tren Kepatuhan Pelaporan SOT</h2>
+                  <p class="section-meta mb-0" id="trendSub"></p>
+                </div>
+                <span class="badge-status status-none" id="trendBadge" hidden></span>
+              </div>
+
+              <div class="chart-wrap sot-chart-wrap">
+                <canvas id="trendChart" role="img" aria-label="Grafik tren kepatuhan pelaporan SOT bulanan"></canvas>
+                <div class="chart-empty" id="trendEmpty" hidden>Belum ada data tren untuk pilihan ini.</div>
+              </div>
+              <p class="chart-note" id="trendNote"></p>
+
+              <div class="visually-hidden">
+                <table id="trendTable">
+                  <caption>Tren kepatuhan pelaporan SOT per bulan</caption>
+                  <thead><tr><th scope="col">Bulan</th><th scope="col">Kepatuhan</th><th scope="col">Target minimum</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+
+      <footer class="app-footer">
+        Unit of OHS PT. Semen Tonasa
+      </footer>
+    </main>
+  </div>
+
+  <div class="modal fade kpi-modal" id="deptModal" tabindex="-1" aria-labelledby="deptModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable modal-fullscreen-sm-down">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title" id="deptModalTitle"></h2>
+            <p class="kpi-modal-sub" id="deptModalSub"></p>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup rincian departemen"></button>
+        </div>
+        <div class="modal-body" id="deptModalBody" tabindex="0" role="region" aria-labelledby="deptModalTitle"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/lucide@1.61.0/dist/umd/lucide.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/data-service.js"></script>
+  <script src="assets/js/sot.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

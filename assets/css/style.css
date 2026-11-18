@@ -253,6 +253,14 @@ a.nav-item-link:hover { background: rgba(255, 255, 255, 0.07); color: #fff; }
   .header-tools #refreshBtn { flex: 0 0 38px; width: 38px; height: 38px; }
   .header-tools #refreshBtn svg { width: 18px; height: 18px; }
 }
+@media (max-width: 575.98px) {
+  .header-tools .tool-label { display: none; }
+  .header-tools .tool-select {
+    flex: 0 0 72px;
+    width: 72px !important;
+    max-width: 72px !important;
+  }
+}
 @media (max-width: 400px) {
   .header-tools .tool-label { display: none; }
   .header-tools .tool-select {
